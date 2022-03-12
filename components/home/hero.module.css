@@ -1,0 +1,9 @@
+.cloud {
+  background: url('../../assets/images/cloud.png') no-repeat center;
+  background-size: contain;
+}
+
+.arch {
+  background: url('../../assets/images/arch.png') no-repeat center;
+  background-size: contain;
+}
