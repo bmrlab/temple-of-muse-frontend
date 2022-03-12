@@ -10,7 +10,7 @@ export default function SiteHeader() {
       'justify-between items-center',
       'h-20 px-4'
     )}>
-      <span>Temple Of Muse</span>
+      <span className='text-grandslang'>Temple Of Muse</span>
       <button className={clsx(
         'border border-white hover:border-white/75 hover:text-white/75',
         'rounded-full px-4 py-1',

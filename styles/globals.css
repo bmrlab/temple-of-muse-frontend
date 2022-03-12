@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@font-face {
+  font-family: 'GrandSlangRoman';
+  src: url('../assets/fonts/grandslang-roman-webfont.woff2') format('woff2'),
+       url('../assets/fonts/grandslang-roman-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.text-grandslang {
+  font-family: GrandSlangRoman, sans-serif;
+}

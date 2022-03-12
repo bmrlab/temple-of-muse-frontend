@@ -16,7 +16,7 @@ export default function SiteFooter() {
         <div className={styles.divider}></div>
         <div className='px-12'>Discord</div>
         <div className={styles.divider}></div>
-        <div className='flex-1 text-4xl'>Made with gas by BMR-LAB</div>
+        <div className='flex-1 text-4xl text-grandslang'>Made with gas by BMR-LAB</div>
       </div>
       <div className='p-4 text-center text-sm text-white/50'>©2022 BMR-LAB</div>
     </footer>
