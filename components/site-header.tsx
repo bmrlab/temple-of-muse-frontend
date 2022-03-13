@@ -6,6 +6,7 @@ export default function SiteHeader() {
     <header className={clsx(
       styles.header,
       // 'bg-red-700',
+      'relative z-10',
       'flex flex-row',
       'justify-between items-center',
       'h-20 px-4'

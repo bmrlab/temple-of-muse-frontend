@@ -32,7 +32,7 @@ export default function CursorDot() {
     <>
       <div
         ref={mouseCircle}
-        className='fixed w-16 h-16 -mx-8 -my-8 rounded-full pointer-events-none'
+        className='fixed z-50 w-16 h-16 -mx-8 -my-8 rounded-full pointer-events-none'
         style={{
           'backgroundColor':'#420EFC',
           'display': 'none',
