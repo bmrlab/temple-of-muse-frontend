@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import styles from './scroll-text.module.css'
 
 export default function ScrollText() {
   return (

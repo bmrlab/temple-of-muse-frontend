@@ -8,16 +8,18 @@ import Hero from '../components/home/hero'
 import Space from '../components/home/space'
 import ScrollText from '../components/home/scroll-text'
 import Mindmap from '../components/home/mindmap'
+import CursorDot from '../components/home/cursor-dot'
 import styles from './index.module.css'
 
 const Home: NextLayoutPage = () => {
   return (
-    <div>
+    <>
       <Hero />
       <Space />
       <ScrollText />
       <Mindmap />
-    </div>
+      <CursorDot />
+    </>
   )
 }
 
