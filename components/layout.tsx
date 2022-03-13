@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react'
 import Head from 'next/head'
 import clsx from 'clsx'
-import styles from './layout.module.css'
 
 import SiteHeader from '../components/layouts/site-header'
 import SiteFooter from '../components/layouts/site-footer'
@@ -14,7 +13,6 @@ type Props = {
 export default function Layout({ children }: Props) {
   return (
     <div className={clsx(
-      // styles.layout,
       'overflow-hidden',
       'min-h-screen',
       'text-white bg-black',
