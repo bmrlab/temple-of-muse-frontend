@@ -18,7 +18,7 @@ const Home: NextLayoutPage = () => {
       <Space />
       <ScrollText />
       <Mindmap />
-      <CursorDot />
+      {/*<CursorDot />*/}
     </>
   )
 }
