@@ -5,6 +5,7 @@ import type {
 import clsx from 'clsx'
 import Layout from '../components/layout'
 import Hero from '../components/home/hero'
+import Space from '../components/home/space'
 import ScrollText from '../components/home/scroll-text'
 import Mindmap from '../components/home/mindmap'
 import styles from './index.module.css'
@@ -13,6 +14,7 @@ const Home: NextLayoutPage = () => {
   return (
     <div>
       <Hero />
+      <Space />
       <ScrollText />
       <Mindmap />
     </div>
