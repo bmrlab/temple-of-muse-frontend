@@ -18,7 +18,7 @@ export default function SiteHeader() {
       <div className='flex-1'>
         {/* placeholder */}
       </div>
-      <div>
+      <div className='hidden sm:block'>
         <button className={clsx(
           'border border-white hover:border-white/75 hover:text-white/75',
           'rounded-full px-4 py-1',
