@@ -4,6 +4,7 @@ import styles from './hero.module.css'
 
 import imageArch from '../../assets/images/arch.png'
 import imageCloud from '../../assets/images/cloud.png'
+import imageStatue from '../../assets/images/muse-statue.png'
 
 export default function Hero() {
   let [offsetX, setOffsetX] = useState(5)
@@ -32,7 +33,14 @@ export default function Hero() {
         'relative',
       )} style={{
         'backgroundImage': `url(${imageArch.src})`
-      }}></div>
+      }}>
+        <div className={clsx(
+          'bg-center bg-no-repeat bg-contain',
+          'absolute left-0 top-0 w-full h-full',
+        )} style={{
+          'backgroundImage': `url(${imageStatue.src})`
+        }}></div>
+      </div>
 
       <h1 className={clsx(
         styles.textHeading,
