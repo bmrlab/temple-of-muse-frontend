@@ -6,7 +6,7 @@ import imageArch from '../../assets/images/arch.png'
 import imageCloud from '../../assets/images/cloud.png'
 import imageStatue from '../../assets/images/muse-statue.png'
 
-function initCloudMove(cloudEl) {
+function initCloudMove(cloudEl: RefObject<HTMLDivElement>) {
   if (typeof window !== 'undefined') {
     const move = () => {
       window.requestAnimationFrame(move)
@@ -65,7 +65,7 @@ export default function Hero() {
       <h2 className={clsx(
         'font-serif',
         'text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide text-center my-4'
-      )}>Show your collection to the world.</h2>
+      )}>Show your collection to the world</h2>
 
       <button className={clsx(
         'block w-48 mx-auto my-12',
