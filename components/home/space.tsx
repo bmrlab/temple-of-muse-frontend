@@ -9,9 +9,14 @@ type Props = {
 
 export default function Space({ showSpace, setShowSpace }: Props) {
   const rootEl = useRef<HTMLDivElement>(null)
-  if (showSpace) {
-    if (rootEl && rootEl.current) {
-      window.scrollTo(0, rootEl.current.offsetTop)
+  if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+    if (showSpace) {
+      if (rootEl && rootEl.current) {
+        window.scrollTo(0, rootEl.current.offsetTop)
+      }
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
     }
   }
   return (

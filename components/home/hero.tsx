@@ -36,7 +36,7 @@ export default function Hero({ tryDemo } : Props) {
   }
 
   return (
-    <div className={clsx('min-h-screen', 'relative')}>
+    <div className={clsx('relative', 'pb-10' /*, 'min-h-screen'*/)}>
       <div ref={cloudEl} className={clsx(
         'bg-center bg-no-repeat bg-contain',
         'w-96 h-48',
@@ -74,7 +74,7 @@ export default function Hero({ tryDemo } : Props) {
       <button className={clsx(
         'block w-48 mx-auto my-12',
         'border py-2 text-sm bg-white hover:bg-white/90 text-black',
-      )} onClick={tryDemo}>TRY DEMO</button>
+      )} onClick={() => tryDemo()}>TRY DEMO</button>
     </div>
   )
 }
