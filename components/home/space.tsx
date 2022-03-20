@@ -39,7 +39,7 @@ export default function Space({ showSpace, setShowSpace }: Props) {
           )} onClick={() => setShowSpace(false)}>EXIT DEMO</button>
         </>
       ) : (
-        <div className='absolute left-0 top-0 w-full h-full border-none'></div>
+        <div className='absolute left-0 top-0 w-full h-full border-none bg-black/30'></div>
       )}
     </div>
   )

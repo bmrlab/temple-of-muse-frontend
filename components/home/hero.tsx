@@ -7,16 +7,14 @@ import imageCloud from '../../assets/images/cloud.png'
 import imageStatue from '../../assets/images/muse-statue.png'
 
 function initCloudMove(cloudEl: RefObject<HTMLDivElement>) {
-  if (typeof window !== 'undefined') {
-    const move = () => {
-      window.requestAnimationFrame(move)
-      if (cloudEl && cloudEl.current) {
-        const newX = Math.floor(window.scrollY * 100 / window.innerHeight) + 5
-        cloudEl.current.style.right = `${Math.min(newX, 100)}%`
-      }
+  const move = () => {
+    window.requestAnimationFrame(move)
+    if (cloudEl && cloudEl.current) {
+      const newX = Math.floor(window.scrollY * 100 / window.innerHeight) + 5
+      cloudEl.current.style.right = `${Math.min(newX, 100)}%`
     }
-    move()
   }
+  move()
 }
 
 type Props = {

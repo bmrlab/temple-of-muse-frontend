@@ -1,8 +1,34 @@
-import { useState } from 'react'
+import { useRef, useState, RefObject } from 'react'
 import clsx from 'clsx'
 import styles from './mindmap.module.css'
 
 import imageCloud from '../../assets/images/cloud.png'
+
+let lastTime = (new Date()).valueOf()
+let offsetX = 0
+let stepY = 0.5
+let dir = -1
+function initCloudMove(cloudEl: RefObject<HTMLDivElement>) {
+  const move = () => {
+    window.requestAnimationFrame(move)
+    if (cloudEl && cloudEl.current) {
+      const widthWindow = window.innerWidth
+      const heightWindow = window.innerHeight
+      const elapsed = (new Date()).valueOf() - lastTime
+      const stepX = elapsed * widthWindow / 15000
+      lastTime += elapsed
+      if (offsetX < -widthWindow) {
+        dir = 1
+      }
+      if (offsetX > widthWindow * 0.05) {
+        dir = -1
+      }
+      offsetX += stepX * dir
+      cloudEl.current.style.transform = `translate3d(${offsetX}px, 0, 0)`
+    }
+  }
+  move()
+}
 
 const mindmaps = [{
   index: 'I', title: 'Vision & Value'
@@ -105,19 +131,27 @@ const getMindmapDetail = (detailIndex: number) => {
 export default function Mindmap() {
   let [detailIndex, setDetailIndex] = useState(0)
 
+  const cloudEl = useRef<HTMLDivElement>(null)
+
+  if (typeof window !== 'undefined') {
+    initCloudMove(cloudEl)
+  }
+
   return (
-    <div className={clsx('min-h-screen', 'relative', 'px-6')}>
-      <div className={clsx(
+    <div className={clsx('relative', 'px-6 py-16 sm:py-32', /*, 'min-h-screen'*/)}>
+      <div ref={cloudEl} className={clsx(
         'bg-center bg-no-repeat bg-contain',
-        'w-96 h-48',
-        'absolute z-0 top-20 left-1/4'
+        'w-96 h-48 lg:w-[36rem] lg:h-[18rem]',
+        'absolute z-0 top-60'
       )} style={{
+        'right': '5%',
         'backgroundImage': `url(${imageCloud.src})`
       }}></div>
 
       <h2 className={clsx(
-        'container mx-auto mt-16 sm:mt-32 mb-12 sm:mb-6',
-        'text-3xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl'
+        'font-serif',
+        'container mx-auto mb-6 sm:mb-12',
+        'text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl'
       )}>Mindmap</h2>
       <div className={clsx(
         'container mx-auto relative',

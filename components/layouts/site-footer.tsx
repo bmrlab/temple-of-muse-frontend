@@ -1,5 +1,9 @@
 import clsx from 'clsx'
+import Image from 'next/image'
 import styles from './site-footer.module.css'
+
+import twitterCircle from '../../assets/images/twitter-circle.png'
+import discordCircle from '../../assets/images/discord-circle.png'
 
 export default function SiteFooter() {
   return (
@@ -11,16 +15,26 @@ export default function SiteFooter() {
         'text-center',
         'border-solid border-t border-white',
       )}>
-        <div className={clsx(
+        <a className={clsx(
           'flex-1 sm:flex-none sm:w-36',
           'flex items-center justify-center',
-          'h-16 border-solid border-b border-white',
-        )}>Twitter</div>
-        <div className={clsx(
+          'block h-16 border-solid border-b border-white',
+        )} href='https://twitter.com/bmr_lab' target='_blank' rel='noreferrer'>
+          <div className='w-8 h-8 mr-2 relative'>
+            <Image src={twitterCircle.src} alt='' layout='fill' objectFit='contain'></Image>
+          </div>
+          <span className='text-lg'>Twitter</span>
+        </a>
+        <a className={clsx(
           'flex-1 sm:flex-none sm:w-36',
           'flex items-center justify-center',
-          'h-16 border-solid border-b border-l border-white',
-        )}>Discord</div>
+          'block h-16 border-solid border-b border-l border-white',
+        )} href='https://discord.gg/DAVgV43YVe' target='_blank' rel='noreferrer'>
+          <div className='w-8 h-8 mr-2 relative'>
+            <Image src={discordCircle.src} alt='' layout='fill' objectFit='contain'></Image>
+          </div>
+          <span className='text-lg'>Discord</span>
+        </a>
         <div className={clsx(
           'flex-none w-full sm:flex-1 sm:w-auto',
           'flex items-center justify-center',
