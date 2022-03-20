@@ -43,13 +43,13 @@ export default function Hero() {
       </div>
 
       <h1 className={clsx(
-        styles.textHeading,
+        'font-serif',
         'text-5xl sm:text-6xl md:text-8xl font-bold tracking-wide text-center my-4'
-      )}>3D GALLERY</h1>
+      )}>Unique 3D Space</h1>
       <h2 className={clsx(
-        styles.textHeading,
+        'font-serif',
         'text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide text-center my-4'
-      )}>To Show Your NFTs</h2>
+      )}>Show your collection to the world.</h2>
 
       <button className={clsx(
         'block w-48 mx-auto my-12',
