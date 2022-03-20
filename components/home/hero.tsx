@@ -19,7 +19,11 @@ function initCloudMove(cloudEl: RefObject<HTMLDivElement>) {
   }
 }
 
-export default function Hero() {
+type Props = {
+  tryDemo: Function
+}
+
+export default function Hero({ tryDemo } : Props) {
   // let [offsetX, setOffsetX] = useState(5)
   const cloudEl = useRef<HTMLDivElement>(null)
 
@@ -70,7 +74,7 @@ export default function Hero() {
       <button className={clsx(
         'block w-48 mx-auto my-12',
         'border py-2 text-sm bg-white hover:bg-white/90 text-black',
-      )}>TRY DEMO</button>
+      )} onClick={tryDemo}>TRY DEMO</button>
     </div>
   )
 }
