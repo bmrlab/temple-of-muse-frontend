@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState, RefObject } from 'react'
 import clsx from 'clsx'
 import styles from './hero.module.css'
 
@@ -6,24 +6,40 @@ import imageArch from '../../assets/images/arch.png'
 import imageCloud from '../../assets/images/cloud.png'
 import imageStatue from '../../assets/images/muse-statue.png'
 
+function initCloudMove(cloudEl) {
+  if (typeof window !== 'undefined') {
+    const move = () => {
+      window.requestAnimationFrame(move)
+      if (cloudEl && cloudEl.current) {
+        const newX = Math.floor(window.scrollY * 100 / window.innerHeight) + 5
+        cloudEl.current.style.right = `${Math.min(newX, 100)}%`
+      }
+    }
+    move()
+  }
+}
+
 export default function Hero() {
-  let [offsetX, setOffsetX] = useState(5)
+  // let [offsetX, setOffsetX] = useState(5)
+  const cloudEl = useRef<HTMLDivElement>(null)
 
   if (typeof window !== 'undefined') {
-    window.addEventListener('scroll', () => {
-      const newX = Math.floor(window.scrollY * 100 / window.innerHeight) + 5
-      setOffsetX(Math.min(newX, 100))
-    })
+    initCloudMove(cloudEl)
+    // window.addEventListener('scroll', () => {
+    //   const newX = Math.floor(window.scrollY * 100 / window.innerHeight) + 5
+    //   setOffsetX(Math.min(newX, 100))
+    // })
   }
 
   return (
     <div className={clsx('min-h-screen', 'relative')}>
-      <div className={clsx(
+      <div ref={cloudEl} className={clsx(
         'bg-center bg-no-repeat bg-contain',
         'w-96 h-48',
         'fixed z-0 top-8'
       )} style={{
-        'right':`${offsetX}%`,
+        // 'right':`${offsetX}%`,
+         'right': '5%',
         'backgroundImage': `url(${imageCloud.src})`
       }}></div>
 
