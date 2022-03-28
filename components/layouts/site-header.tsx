@@ -1,7 +1,29 @@
 import clsx from 'clsx'
 import styles from './site-header.module.css'
+import { ethers } from 'ethers'
+import Web3Modal from 'web3modal'
+import { useRecoilState } from 'recoil'
+import { walletAddressState } from '../../lib/recoil/wallet'
+
+const providerOptions = {
+  /* See Provider Options Section */
+}
 
 export default function SiteHeader() {
+  const [walletAddress, setWalletAddress] = useRecoilState(walletAddressState)
+
+  async function connect() {
+    const web3Modal = new Web3Modal({
+      network: 'mainnet',
+      cacheProvider: true,
+      providerOptions: providerOptions,
+    })
+    const instance = await web3Modal.connect()
+    const provider = new ethers.providers.Web3Provider(instance)
+    const signer = provider.getSigner()
+    setWalletAddress(await signer.getAddress())
+  }
+
   return (
     <header className={clsx(
       styles.header,
@@ -19,10 +41,17 @@ export default function SiteHeader() {
         {/* placeholder */}
       </div>
       <div className='hidden sm:block'>
-        <button className={clsx(
-          'border border-white hover:border-white/75 hover:text-white/75',
-          'rounded-full px-4 py-1',
-        )}>Connect Wallet</button>
+        {walletAddress ? (
+          <div className={clsx(
+            'border border-white hover:border-white/75 hover:text-white/75',
+            'rounded-full px-4 py-1',
+          )}>{walletAddress}</div>
+        ) : (
+          <button className={clsx(
+            'border border-white hover:border-white/75 hover:text-white/75',
+            'rounded-full px-4 py-1',
+          )} onClick={connect}>Connect Wallet</button>
+        )}
       </div>
     </header>
   )
