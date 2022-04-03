@@ -2,9 +2,9 @@ import React, { ReactNode } from 'react'
 import Head from 'next/head'
 import clsx from 'clsx'
 
-import SiteHeader from '../components/layouts/site-header'
-import SiteFooter from '../components/layouts/site-footer'
-import SiteDeco from '../components/layouts/site-deco'
+import SiteHeader from '@/components/layouts/site-header'
+import SiteFooter from '@/components/layouts/site-footer'
+import SiteDeco from '@/components/layouts/site-deco'
 
 type Props = {
   children?: ReactNode

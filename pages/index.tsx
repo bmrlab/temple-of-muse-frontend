@@ -4,12 +4,12 @@ import type {
 } from 'next'
 import { useState } from 'react'
 import clsx from 'clsx'
-import Layout from '../components/layout'
-import Hero from '../components/home/hero'
-import Space from '../components/home/space'
-import ScrollText from '../components/home/scroll-text'
-import Mindmap from '../components/home/mindmap'
-import CursorDot from '../components/home/cursor-dot'
+import Layout from '@/components/layout'
+import Hero from '@/components/home/hero'
+import Space from '@/components/home/space'
+import ScrollText from '@/components/home/scroll-text'
+import Mindmap from '@/components/home/mindmap'
+import CursorDot from '@/components/home/cursor-dot'
 import styles from './index.module.css'
 
 const Home: NextLayoutPage = () => {

@@ -3,7 +3,9 @@ import styles from './site-header.module.css'
 import { ethers } from 'ethers'
 import Web3Modal from 'web3modal'
 import { useRecoilState } from 'recoil'
-import { walletAddressState } from '../../lib/recoil/wallet'
+import { walletAddressState } from '@/lib/recoil/wallet'
+
+const maskedAddress = (address: string) => address.toLowerCase().replace(/0x(\w{4})\w+(\w{4})/, '0x$1...$2')
 
 const providerOptions = {
   /* See Provider Options Section */
@@ -45,7 +47,7 @@ export default function SiteHeader() {
           <div className={clsx(
             'border border-white hover:border-white/75 hover:text-white/75',
             'rounded-full px-4 py-1',
-          )}>{walletAddress}</div>
+          )}>{maskedAddress(walletAddress)}</div>
         ) : (
           <button className={clsx(
             'border border-white hover:border-white/75 hover:text-white/75',

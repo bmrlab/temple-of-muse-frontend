@@ -1,7 +1,8 @@
 import type { NextLayoutPage } from 'next'
 import { useState } from 'react'
 import clsx from 'clsx'
-import Layout from '../components/layout'
+import axios from 'axios'
+import Layout from '@/components/layout'
 
 const Assets: NextLayoutPage = () => {
   return (
