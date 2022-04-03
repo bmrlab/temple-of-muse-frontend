@@ -2,13 +2,21 @@ import clsx from 'clsx'
 import styles from './site-header.module.css'
 import { ethers } from 'ethers'
 import Web3Modal from 'web3modal'
+import WalletConnectProvider from '@walletconnect/web3-provider'
 import { useRecoilState } from 'recoil'
 import { walletAddressState } from '@/lib/recoil/wallet'
 
 const maskedAddress = (address: string) => address.toLowerCase().replace(/0x(\w{4})\w+(\w{4})/, '0x$1...$2')
 
 const providerOptions = {
-  /* See Provider Options Section */
+  walletconnect: {
+    package: WalletConnectProvider,
+    options: {
+      rpc: {
+        1: 'https://eth-mainnet.alchemyapi.io/v2/SjdU6lodzNjnVpJMFQPRtl4SoEzJfCLG'
+      },
+    }
+  }
 }
 
 export default function SiteHeader() {
@@ -17,7 +25,7 @@ export default function SiteHeader() {
   async function connect() {
     const web3Modal = new Web3Modal({
       network: 'mainnet',
-      cacheProvider: true,
+      cacheProvider: false,
       providerOptions: providerOptions,
     })
     const instance = await web3Modal.connect()
