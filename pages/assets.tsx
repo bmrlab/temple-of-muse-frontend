@@ -1,14 +1,20 @@
-import type { NextLayoutPage } from 'next'
-import { useState } from 'react'
 import clsx from 'clsx'
-import axios from 'axios'
+import type { NextLayoutPage } from 'next'
+import { useRecoilValue } from 'recoil'
 import Layout from '@/components/layout'
+import NFTs from '@/components/nfts'
+import { walletAddressState } from '@/lib/recoil/wallet'
 
 const Assets: NextLayoutPage = () => {
+  const walletAddress = useRecoilValue(walletAddressState)
   return (
-    <>
-      {/**/}
-    </>
+    <div className='container mx-auto'>
+      {walletAddress ? (
+        <NFTs walletAddress={walletAddress} />
+      ) : (
+        <span>Connect</span>
+      )}
+    </div>
   )
 }
 
