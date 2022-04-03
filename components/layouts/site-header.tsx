@@ -33,28 +33,26 @@ export default function SiteHeader() {
       'relative z-10',
       'flex flex-row',
       'justify-between items-center',
-      'h-20 px-4'
+      'h-16 sm:h-20 px-4'
     )}>
       <div className='flex flex-row justify-start items-end'>
-        <div className={clsx('w-8 h-8 mr-1', styles.logo)}>{/*logo*/}</div>
-        <span className='text-grandslang text-lg -mb-2'>Temple OF Muse</span>
+        <div className={clsx('w-6 h-6 sm:w-8 sm:h-8 mb-2 mr-1', styles.logo)}>{/*logo*/}</div>
+        <span className='text-grandslang text-base sm:text-lg'>Temple OF Muse</span>
       </div>
       <div className='flex-1'>
         {/* placeholder */}
       </div>
-      <div className='hidden sm:block'>
-        {walletAddress ? (
-          <div className={clsx(
-            'border border-white hover:border-white/75 hover:text-white/75',
-            'rounded-full px-4 py-1',
-          )}>{maskedAddress(walletAddress)}</div>
-        ) : (
-          <button className={clsx(
-            'border border-white hover:border-white/75 hover:text-white/75',
-            'rounded-full px-4 py-1',
-          )} onClick={connect}>Connect Wallet</button>
-        )}
-      </div>
+      {walletAddress ? (
+        <div className={clsx(
+          'border border-white hover:border-white/75 hover:text-white/75',
+          'rounded-full text-xs sm:text-sm px-4 py-1',
+        )}>{maskedAddress(walletAddress)}</div>
+      ) : (
+        <button className={clsx(
+          'border border-white hover:border-white/75 hover:text-white/75',
+          'rounded-full text-xs sm:text-sm px-4 py-1',
+        )} onClick={connect}>Connect Wallet</button>
+      )}
     </header>
   )
 }
