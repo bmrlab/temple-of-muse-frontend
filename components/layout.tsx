@@ -10,6 +10,11 @@ type Props = {
   children?: ReactNode
 }
 
+/**
+ * see https://github.com/vercel/next.js/blob/canary/examples/blog/pages/_document.js
+ * to override default html template
+ */
+
 export default function Layout({ children }: Props) {
   return (
     <div className={clsx(

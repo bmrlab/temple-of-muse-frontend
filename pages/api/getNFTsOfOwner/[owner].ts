@@ -13,43 +13,45 @@ type NFTData = {
   },
   tokenId: number,
   tokenUri: string,
-  metadata: { [key: string]: any } & {
-    image: string
-  }
+  mediaUri: string,
+  // metadata: { [key: string]: any } & {
+  //   image: string
+  // }
 }
 
-const getNFTs = async function(ownerAddress: string): Promise<Array<NFTData>> {
-  const res = await AlchemyAPI.get('getNFTs/', {
-    params: {
-      owner: ownerAddress
-    }
-  })
-  const { ownedNfts } = res.data
-  return ownedNfts.map((nft: any): NFTData => {
+type ResponseData = {
+  pageKey: string,
+  totalCount: number,
+  results: Array<NFTData>
+}
+
+const getNFTs = async function(ownerAddress: string, _pageKey?: string): Promise<ResponseData> {
+  const params: any = { owner: ownerAddress }
+  if (_pageKey) {
+    params.pageKey = _pageKey
+  }
+  const res = await AlchemyAPI.get('getNFTs/', { params })
+  const { pageKey, totalCount, ownedNfts } = res.data
+  const results = ownedNfts.map((nft: any): NFTData => {
     return {
       contract: { address: nft.contract.address },
       tokenId: +nft.id.tokenId,
       tokenUri: nft.tokenUri.gateway,
-      metadata: {
-        // ...nft.metadata,
-        image: nft.metadata.image
-      }
+      mediaUri: nft.media[0]?.gateway,
     }
   })
+  return { pageKey, totalCount, results }
 }
-
-type Data = {
-  ownedNfts: Array<NFTData>
-} | string
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<ResponseData | string>
 ) {
-  const ownerAddress = req.query.owner.toString()
+  const ownerAddress = (req.query.owner ?? '').toString()
+  const _pageKey = (req.query.pageKey ?? '').toString()
   try {
-    const ownedNfts = await getNFTs(ownerAddress)
-    res.status(200).json({ ownedNfts })
+    const result = await getNFTs(ownerAddress, _pageKey)
+    res.status(200).json(result)
   } catch(err) {
     res.status(500).send('server error')
   }
