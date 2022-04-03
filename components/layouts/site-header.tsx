@@ -1,39 +1,8 @@
 import clsx from 'clsx'
 import styles from './site-header.module.css'
-import { ethers } from 'ethers'
-import Web3Modal from 'web3modal'
-import WalletConnectProvider from '@walletconnect/web3-provider'
-import { useRecoilState } from 'recoil'
-import { walletAddressState } from '@/lib/recoil/wallet'
-
-const maskedAddress = (address: string) => address.toLowerCase().replace(/0x(\w{4})\w+(\w{4})/, '0x$1...$2')
-
-const providerOptions = {
-  walletconnect: {
-    package: WalletConnectProvider,
-    options: {
-      rpc: {
-        1: 'https://eth-mainnet.alchemyapi.io/v2/SjdU6lodzNjnVpJMFQPRtl4SoEzJfCLG'
-      },
-    }
-  }
-}
+import ConnectButton from '@/components/connect-button'
 
 export default function SiteHeader() {
-  const [walletAddress, setWalletAddress] = useRecoilState(walletAddressState)
-
-  async function connect() {
-    const web3Modal = new Web3Modal({
-      network: 'mainnet',
-      cacheProvider: false,
-      providerOptions: providerOptions,
-    })
-    const instance = await web3Modal.connect()
-    const provider = new ethers.providers.Web3Provider(instance)
-    const signer = provider.getSigner()
-    setWalletAddress(await signer.getAddress())
-  }
-
   return (
     <header className={clsx(
       styles.header,
@@ -50,17 +19,7 @@ export default function SiteHeader() {
       <div className='flex-1'>
         {/* placeholder */}
       </div>
-      {walletAddress ? (
-        <div className={clsx(
-          'border border-white hover:border-white/75 hover:text-white/75',
-          'rounded-full text-xs sm:text-sm px-4 py-1',
-        )}>{maskedAddress(walletAddress)}</div>
-      ) : (
-        <button className={clsx(
-          'border border-white hover:border-white/75 hover:text-white/75',
-          'rounded-full text-xs sm:text-sm px-4 py-1',
-        )} onClick={connect}>Connect Wallet</button>
-      )}
+      <ConnectButton />
     </header>
   )
 }

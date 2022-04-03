@@ -7,7 +7,7 @@ type NFTData = {
   contract: {
     address: string
   },
-  tokenId: number,
+  tokenId: string,
   tokenUri: string,
   mediaUri: string,
 }

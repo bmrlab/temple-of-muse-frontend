@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios'
+import { ethers } from 'ethers'
 
 const ALCHEMY_API_KEY = process.env.ALCHEMY_API_KEY
 const AlchemyAPI = axios.create({
@@ -11,7 +12,7 @@ type NFTData = {
   contract: {
     address: string
   },
-  tokenId: number,
+  tokenId: string,
   tokenUri: string,
   mediaUri: string,
   // metadata: { [key: string]: any } & {
@@ -35,7 +36,7 @@ const getNFTs = async function(ownerAddress: string, _pageKey?: string): Promise
   const results = ownedNfts.map((nft: any): NFTData => {
     return {
       contract: { address: nft.contract.address },
-      tokenId: +nft.id.tokenId,
+      tokenId: ethers.BigNumber.from(nft.id.tokenId).toString(),
       tokenUri: nft.tokenUri.gateway,
       mediaUri: nft.media[0]?.gateway,
     }
