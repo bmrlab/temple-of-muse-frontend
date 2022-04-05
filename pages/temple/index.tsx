@@ -1,13 +1,16 @@
-import type { NextPage } from 'next'
+import type { NextLayoutPage } from 'next'
 import { useEffect } from 'react'
 import Head from 'next/head'
 import Layout from '@/components/layout'
-
 
 function renderWebGL() {
   var canvas = document.querySelector('#unity-canvas')
   var loadingBar = document.querySelector('#unity-loading-bar')
   var progressBarFull = document.querySelector('#unity-progress-bar-full')
+
+  ;(canvas as any).style.width = window.innerWidth + 'px'
+  ;(canvas as any).style.height = window.innerHeight + 'px'
+  ;(loadingBar as any).style.display = 'block'
 
   var buildUrl = '/space/Build'
   var loaderUrl = buildUrl + '/temple_of_muse_build.loader.js'
@@ -21,19 +24,15 @@ function renderWebGL() {
     productVersion: '0.1',
   }
 
-  canvas.style.width = window.innerWidth + 'px'
-  canvas.style.height = window.innerHeight + 'px'
-  loadingBar.style.display = 'block'
-
   var script = document.createElement('script')
   script.src = loaderUrl
   script.onload = () => {
-    createUnityInstance(canvas, config, (progress) => {
-      progressBarFull.style.width = 100 * progress + '%'
-    }).then((unityInstance) => {
-      window.unityInstance = unityInstance
-      loadingBar.style.display = 'none'
-    }).catch((message) => {
+    (window as any).createUnityInstance(canvas, config, (progress: number) => {
+      ;(progressBarFull as any).style.width = 100 * progress + '%'
+    }).then((unityInstance: any) => {
+      (window as any).unityInstance = unityInstance
+      ;(loadingBar as any).style.display = 'none'
+    }).catch((message: string) => {
       alert(message)
     })
   }
@@ -41,8 +40,7 @@ function renderWebGL() {
 }
 
 
-const Temple: NextPage = () => {
-
+const Temple: NextLayoutPage = () => {
   useEffect(() => {
     renderWebGL()
   }, [])
@@ -60,8 +58,8 @@ const Temple: NextPage = () => {
       </div>
     </div>
   )
-
 }
+
 
 Temple.getLayout = function getLayout(page) {
   return (
