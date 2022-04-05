@@ -9,7 +9,7 @@ function renderWebGL() {
   var progressBarFull = document.querySelector('#unity-progress-bar-full')
 
   ;(canvas as any).style.width = window.innerWidth + 'px'
-  ;(canvas as any).style.height = window.innerHeight + 'px'
+  ;(canvas as any).style.height = (window.innerHeight - 200) + 'px'
   ;(loadingBar as any).style.display = 'block'
 
   var buildUrl = '/space/Build'
@@ -50,7 +50,7 @@ const Temple: NextLayoutPage = () => {
       {/*<Head>
         <title>Temple of Muse</title>
       </Head>*/}
-      <canvas id='unity-canvas' width='960' height='600'></canvas>
+      <canvas id='unity-canvas'></canvas>
       <div id='unity-loading-bar'>
         <div id='unity-progress-bar-empty'>
           <div id='unity-progress-bar-full'></div>

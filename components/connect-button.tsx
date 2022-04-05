@@ -76,7 +76,7 @@ export default function ConnectButton() {
     <div className={clsx(
       'border border-white hover:border-white/75 hover:text-white/75',
       'rounded-full text-xs sm:text-sm px-4 py-1',
-      'cursor-pointer'
+      'inline-block cursor-pointer'
     )} onClick={disconnect}>{maskedAddress(walletAddress)}</div>
   ) : (
     <ClickToConnect connect={connect} />

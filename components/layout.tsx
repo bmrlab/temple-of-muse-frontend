@@ -4,7 +4,6 @@ import clsx from 'clsx'
 
 import SiteHeader from '@/components/layouts/site-header'
 import SiteFooter from '@/components/layouts/site-footer'
-import SiteDeco from '@/components/layouts/site-deco'
 
 type Props = {
   children?: ReactNode
@@ -30,7 +29,6 @@ export default function Layout({ children }: Props) {
       <SiteHeader />
       <main className='flex-1'>{children}</main>
       <SiteFooter />
-      <SiteDeco />
     </div>
   )
 }

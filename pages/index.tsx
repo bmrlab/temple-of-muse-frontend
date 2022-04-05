@@ -9,6 +9,7 @@ import Hero from '@/components/home/hero'
 import Space from '@/components/home/space'
 import ScrollText from '@/components/home/scroll-text'
 import Mindmap from '@/components/home/mindmap'
+import SiteDeco from '@/components/home/site-deco'
 import CursorDot from '@/components/home/cursor-dot'
 import styles from './index.module.css'
 
@@ -23,6 +24,7 @@ const Home: NextLayoutPage = () => {
       <Space showSpace={showSpace} setShowSpace={setShowSpace} />
       <ScrollText />
       <Mindmap />
+      <SiteDeco />
       {/*<CursorDot />*/}
     </>
   )
