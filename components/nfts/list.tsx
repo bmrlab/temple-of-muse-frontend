@@ -1,22 +1,6 @@
 import clsx from 'clsx'
-import axios from 'axios'
 import { useEffect, useState } from 'react'
-
-
-type NFTData = {
-  contract: {
-    address: string
-  },
-  tokenId: string,
-  tokenUri: string,
-  mediaUri: string,
-}
-
-type ResponseData = {
-  pageKey: string,
-  totalCount: number,
-  results: Array<NFTData>
-}
+import { getNFTs, NFTData } from '@/lib/nfts'
 
 type Props = {
   walletAddress: string
@@ -27,21 +11,13 @@ export default function NFTs({ walletAddress }: Props) {
   let [nfts, setNFTs] = useState<Array<NFTData>>([])
   let [pageKey, setPageKey] = useState<string|undefined>()
 
-  const getNFTs = async (walletAddress: string, _pageKey?: string) => {
-    setPending(true)
-    const res = await axios.get(`/api/getNFTsOfOwner/${walletAddress}`, {
-      params: {
-        pageKey: _pageKey
-      }
-    })
-    const data = res.data as ResponseData
-    setNFTs([ ...data.results ])
-    setPageKey(data.pageKey)
-    setPending(false)
-  }
-
   useEffect(() => {
-    getNFTs(walletAddress)
+    setPending(true)
+    getNFTs(walletAddress).then((data) => {
+      setNFTs([ ...data.results ])
+      setPageKey(data.pageKey)
+      setPending(false)
+    })
   }, [walletAddress])
 
   return (
