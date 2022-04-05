@@ -1,4 +1,4 @@
-import { useRef, useState, RefObject } from 'react'
+import { useState, useEffect, useMemo, useRef, RefObject } from 'react'
 import clsx from 'clsx'
 import styles from './hero.module.css'
 
@@ -6,9 +6,9 @@ import imageArch from '../../assets/images/arch.png'
 import imageCloud from '../../assets/images/cloud.png'
 import imageStatue from '../../assets/images/muse-statue.png'
 
-function initCloudMove(cloudEl: RefObject<HTMLDivElement>) {
+function initCloudMove(cloudEl: RefObject<HTMLDivElement>, request: { id: number }) {
   const move = () => {
-    window.requestAnimationFrame(move)
+    request.id = window.requestAnimationFrame(move)
     if (cloudEl && cloudEl.current) {
       const newX = Math.floor(window.scrollY * 100 / window.innerHeight) + 5
       cloudEl.current.style.right = `${Math.min(newX, 100)}%`
@@ -24,14 +24,17 @@ type Props = {
 export default function Hero({ tryDemo } : Props) {
   // let [offsetX, setOffsetX] = useState(5)
   const cloudEl = useRef<HTMLDivElement>(null)
-
-  if (typeof window !== 'undefined') {
-    initCloudMove(cloudEl)
+  const request = useMemo(() => ({id: 0}), [])
+  useEffect(() => {
+    initCloudMove(cloudEl, request)
     // window.addEventListener('scroll', () => {
     //   const newX = Math.floor(window.scrollY * 100 / window.innerHeight) + 5
     //   setOffsetX(Math.min(newX, 100))
     // })
-  }
+    return () => {
+      request.id && window.cancelAnimationFrame(request.id)
+    }
+  }, [cloudEl, request])
 
   return (
     <div className={clsx('relative', 'pb-10' /*, 'min-h-screen'*/)}>

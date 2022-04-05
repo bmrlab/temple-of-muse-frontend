@@ -1,12 +1,12 @@
-import { useRef, RefObject } from 'react'
+import { useRef, useEffect, useMemo, RefObject } from 'react'
 import clsx from 'clsx'
 import styles from './scroll-text.module.css'
 
-function initScroll(spanEl: RefObject<HTMLSpanElement>, dir: number) {
+function initScroll(spanEl: RefObject<HTMLSpanElement>, dir: number, request: { id: number }) {
   let lastTime = (new Date()).valueOf()
   let offset = 0
   const move = () => {
-    window.requestAnimationFrame(move)
+    request.id = window.requestAnimationFrame(move)
     if (spanEl && spanEl.current) {
       const widthSpan = spanEl.current.offsetWidth
       const widthWindow = window.innerWidth
@@ -27,10 +27,16 @@ function initScroll(spanEl: RefObject<HTMLSpanElement>, dir: number) {
 export default function ScrollText() {
   const spanL = useRef<HTMLSpanElement>(null)
   const spanR = useRef<HTMLSpanElement>(null)
-  if (typeof window !== 'undefined') {
-    initScroll(spanL, 1)
-    initScroll(spanR, -1)
-  }
+  const requestL = useMemo(() => ({id: 0}), [])
+  const requestR = useMemo(() => ({id: 0}), [])
+  useEffect(() => {
+    initScroll(spanL, 1, requestL)
+    initScroll(spanR, -1, requestR)
+    return () => {
+      requestL.id && window.cancelAnimationFrame(requestL.id)
+      requestR.id && window.cancelAnimationFrame(requestR.id)
+    }
+  }, [requestL, requestR])
   return (
     <div className={clsx(
       'my-1 sm:my-4 md:my-8',

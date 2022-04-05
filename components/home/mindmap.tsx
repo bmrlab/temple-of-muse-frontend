@@ -1,4 +1,4 @@
-import { useRef, useState, RefObject } from 'react'
+import { useState, useEffect, useMemo, useRef, RefObject } from 'react'
 import clsx from 'clsx'
 import styles from './mindmap.module.css'
 
@@ -8,9 +8,9 @@ let lastTime = (new Date()).valueOf()
 let offsetX = 0
 let stepY = 0.5
 let dir = -1
-function initCloudMove(cloudEl: RefObject<HTMLDivElement>) {
+function initCloudMove(cloudEl: RefObject<HTMLDivElement>, request: { id: number }) {
   const move = () => {
-    window.requestAnimationFrame(move)
+    request.id = window.requestAnimationFrame(move)
     if (cloudEl && cloudEl.current) {
       const widthWindow = window.innerWidth
       const heightWindow = window.innerHeight
@@ -132,10 +132,13 @@ export default function Mindmap() {
   let [detailIndex, setDetailIndex] = useState(0)
 
   const cloudEl = useRef<HTMLDivElement>(null)
-
-  if (typeof window !== 'undefined') {
-    initCloudMove(cloudEl)
-  }
+  const request = useMemo(() => ({id: 0}), [])
+  useEffect(() => {
+    initCloudMove(cloudEl, request)
+    return () => {
+      request.id && window.cancelAnimationFrame(request.id)
+    }
+  }, [cloudEl, request])
 
   return (
     <div className={clsx('relative', 'px-6 py-16 sm:py-32', /*, 'min-h-screen'*/)}>

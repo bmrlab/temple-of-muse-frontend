@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useMemo, useRef, useCallback } from 'react'
 
 const usePrevious = <T extends unknown>(value: T): T | undefined => {
   const ref = useRef<T>()
@@ -13,22 +13,34 @@ export default function ProgressCover({ progress }: { progress: number }) {
   let [loadingProgress, setLoadingProgress] = useState(progress)
   const prevProgress = usePrevious(progress)
 
+  let requestId = useRef(0)
   const updateProgress = useCallback((prev: number, current: number, elapsed: number) => {
     const newProgress = prev + elapsed
     if (newProgress <= 100 && newProgress <= current && newProgress >= loadingProgress) {
       setLoadingProgress(newProgress)
-      window.requestAnimationFrame(() => updateProgress(prev, current, elapsed + 1))
+      requestId.current = window.requestAnimationFrame(() => updateProgress(prev, current, elapsed + 1))
     }
   }, [loadingProgress])
-  useEffect(() => updateProgress(prevProgress || 0, progress, 0))
+  useEffect(() => {
+    updateProgress(prevProgress || 0, progress, 0)
+    return () => {
+      requestId.current && window.cancelAnimationFrame(requestId.current)
+    }
+  })
 
+  let timeoutId = useRef<any>(0)
   const slowUpdateProgress = useCallback((progress: number) => {
     if (progress <= 100 && progress >= loadingProgress) {
       setLoadingProgress(progress)
-      setTimeout(() => slowUpdateProgress(progress + 1), 1000)
+      timeoutId.current = setTimeout(() => slowUpdateProgress(progress + 1), 1000)
     }
   }, [loadingProgress])
-  useEffect(() => slowUpdateProgress(progress), [progress, slowUpdateProgress])
+  useEffect(() => {
+    slowUpdateProgress(progress), [progress, slowUpdateProgress]
+    return () => {
+      timeoutId.current && window.clearTimeout(timeoutId.current)
+    }
+  })
 
   return (
     <div className={clsx(
