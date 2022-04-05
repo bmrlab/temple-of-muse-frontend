@@ -5,6 +5,7 @@ import Head from 'next/head'
 import Layout from '@/components/layout'
 import renderWebGL from '@/components/temple/render-webgl'
 import ProgressCover from '@/components/temple/progress-cover'
+import NFTsDrawer from '@/components/temple/nfts-drawer'
 
 const Temple: NextLayoutPage = () => {
   let [loadingProgress, setProgress] = useState(0)
@@ -16,7 +17,8 @@ const Temple: NextLayoutPage = () => {
   return (
     <div className='relative'>
       <canvas id='unity-canvas'></canvas>
-      <ProgressCover progress={loadingProgress}/>
+      <ProgressCover progress={loadingProgress} />
+      <NFTsDrawer />
     </div>
   )
 }
