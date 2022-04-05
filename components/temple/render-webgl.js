@@ -1,11 +1,8 @@
-export default function renderWebGL() {
+export default function renderWebGL(progressCallback) {
   var canvas = document.querySelector('#unity-canvas')
-  var loadingBar = document.querySelector('#unity-loading-bar')
-  var progressBarFull = document.querySelector('#unity-progress-bar-full')
 
   canvas.style.width = window.innerWidth + 'px'
   canvas.style.height = (window.innerHeight - 200) + 'px'
-  loadingBar.style.display = 'block'
 
   var buildUrl = '/space/Build'
   var loaderUrl = buildUrl + '/temple_of_muse_build.loader.js'
@@ -23,10 +20,10 @@ export default function renderWebGL() {
   script.src = loaderUrl
   script.onload = () => {
     window.createUnityInstance(canvas, config, (progress) => {
-      progressBarFull.style.width = 100 * progress + '%'
+      progressCallback(progress)
     }).then((unityInstance) => {
+      progressCallback(1)
       window.unityInstance = unityInstance
-      loadingBar.style.display = 'none'
     }).catch((message) => {
       alert(message)
     })
