@@ -8,15 +8,32 @@ import { walletAddressState } from '@/lib/recoil/wallet'
 
 const maskedAddress = (address: string) => address.toLowerCase().replace(/0x(\w{4})\w+(\w{4})/, '0x$1...$2')
 
-const providerOptions = {
-  walletconnect: {
-    package: WalletConnectProvider,
-    options: {
-      rpc: {
-        1: 'https://eth-mainnet.alchemyapi.io/v2/SjdU6lodzNjnVpJMFQPRtl4SoEzJfCLG'
-      },
+const WEB3: {
+  getModal: Function,
+  providerOptions: any,
+  _modal: Web3Modal | null
+} = {
+  providerOptions: {
+    walletconnect: {
+      package: WalletConnectProvider,
+      options: {
+        rpc: {
+          1: 'https://eth-mainnet.alchemyapi.io/v2/SjdU6lodzNjnVpJMFQPRtl4SoEzJfCLG'
+        }
+      }
     }
-  }
+  },
+  getModal: function() {
+    if (!this._modal) {
+      this._modal = new Web3Modal({
+        network: 'mainnet',
+        cacheProvider: true,
+        providerOptions: this.providerOptions,
+      })
+    }
+    return this._modal
+  },
+  _modal: null,
 }
 
 const ClickToConnect = ({ connect=()=>{} }: { connect?: Function }) => {
@@ -30,18 +47,8 @@ const ClickToConnect = ({ connect=()=>{} }: { connect?: Function }) => {
 
 export default function ConnectButton() {
   const [walletAddress, setWalletAddress] = useRecoilState(walletAddressState)
-
-  if (typeof window === 'undefined') {
-    return <ClickToConnect />
-  }
-
-  const web3Modal = new Web3Modal({
-    network: 'mainnet',
-    cacheProvider: true,
-    providerOptions: providerOptions,
-  })
-
   async function connect() {
+    const web3Modal = WEB3.getModal()
     const instance = await web3Modal.connect()
     const provider = new ethers.providers.Web3Provider(instance)
     const signer = provider.getSigner()
@@ -49,12 +56,20 @@ export default function ConnectButton() {
   }
 
   function disconnect() {
+    const web3Modal = WEB3.getModal()
     web3Modal.clearCachedProvider()
     setWalletAddress('')
   }
 
-  if (web3Modal.cachedProvider) {
-    connect()
+  useEffect(() => {
+    const web3Modal = WEB3.getModal()
+    if (web3Modal.cachedProvider) {
+      connect()
+    }
+  })
+
+  if (typeof window === 'undefined') {
+    return <ClickToConnect />
   }
 
   return walletAddress ? (
