@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import { useEffect } from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
+import Layout from '@/components/layout'
 
 
 function renderWebGL() {
@@ -49,10 +49,9 @@ const Temple: NextPage = () => {
 
   return (
     <div>
-      <Head>
+      {/*<Head>
         <title>Temple of Muse</title>
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
+      </Head>*/}
       <canvas id='unity-canvas' width='960' height='600'></canvas>
       <div id='unity-loading-bar'>
         <div id='unity-progress-bar-empty'>
@@ -62,6 +61,14 @@ const Temple: NextPage = () => {
     </div>
   )
 
+}
+
+Temple.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  )
 }
 
 export default Temple
