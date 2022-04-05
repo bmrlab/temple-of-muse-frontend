@@ -1,6 +1,5 @@
-import { useState, useEffect, useMemo, useRef, RefObject } from 'react'
 import clsx from 'clsx'
-import styles from './mindmap.module.css'
+import { useState, useEffect, useMemo, useRef, RefObject } from 'react'
 
 import imageCloud from '../../assets/images/cloud.png'
 

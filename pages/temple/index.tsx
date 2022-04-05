@@ -41,7 +41,6 @@ const Temple: NextLayoutPage = () => {
       <canvas id='unity-canvas'></canvas>
       <ProgressCover progress={loadingProgress} />
       <NFTsDrawer visible={drawerVisible} onSelectNFT={onSelectNFT} />
-      <button className='absolute right-0 top-0' onClick={()=>{setDrawerVisible(true)}}>show</button>
     </div>
   )
 }

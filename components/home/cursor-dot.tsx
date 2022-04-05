@@ -1,6 +1,5 @@
-import { useRef, useState } from 'react'
 import clsx from 'clsx'
-import styles from './cursor-dot.module.css'
+import { useRef, useState } from 'react'
 
 export default function CursorDot() {
   const mouseCircle = useRef<HTMLDivElement>(null)

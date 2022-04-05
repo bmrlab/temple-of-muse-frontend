@@ -1,6 +1,5 @@
-import { useRef, useEffect, useMemo, RefObject } from 'react'
 import clsx from 'clsx'
-import styles from './scroll-text.module.css'
+import { useRef, useEffect, useMemo, RefObject } from 'react'
 
 function initScroll(spanEl: RefObject<HTMLSpanElement>, dir: number, request: { id: number }) {
   let lastTime = (new Date()).valueOf()

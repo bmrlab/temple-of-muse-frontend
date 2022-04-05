@@ -1,6 +1,6 @@
-import { useState, useEffect, useMemo, useRef, RefObject } from 'react'
 import clsx from 'clsx'
-import styles from './hero.module.css'
+import Link from 'next/link'
+import { useState, useEffect, useMemo, useRef, RefObject } from 'react'
 
 import imageArch from '../../assets/images/arch.png'
 import imageCloud from '../../assets/images/cloud.png'
@@ -17,11 +17,7 @@ function initCloudMove(cloudEl: RefObject<HTMLDivElement>, request: { id: number
   move()
 }
 
-type Props = {
-  tryDemo: Function
-}
-
-export default function Hero({ tryDemo } : Props) {
+export default function Hero() {
   // let [offsetX, setOffsetX] = useState(5)
   const cloudEl = useRef<HTMLDivElement>(null)
   const request = useMemo(() => ({id: 0}), [])
@@ -72,10 +68,12 @@ export default function Hero({ tryDemo } : Props) {
         'text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide text-center my-4'
       )}>Show your collection to the world</h2>
 
-      <button className={clsx(
-        'block w-48 mx-auto my-12',
-        'border py-2 text-sm bg-white hover:bg-white/90 text-black',
-      )} onClick={() => tryDemo()}>TRY DEMO</button>
+      <Link href='/temple'>
+        <a className={clsx(
+          'block w-48 mx-auto my-12 text-center',
+          'border py-2 text-sm bg-white hover:bg-white/90 text-black',
+        )}>TRY DEMO</a>
+      </Link>
     </div>
   )
 }
