@@ -27,15 +27,20 @@ const Temple: NextLayoutPage = () => {
   }, [])
 
   const onSelectNFT = useCallback((nft) => {
-    const cdnURL =
-      'https://media-cdn.templeofmuse.xyz/api/media-cdn/' +
-      encodeURIComponent(btoa(nft.mediaUri))
-    const payload = JSON.stringify({
+    const payload = {
       slotkey: nftSlot,
-      imageUrl: cdnURL,
-    })
+      imageUrl: nft.mediaUri,
+    }
+    const regExp = new RegExp('^(https?:\/\/ipfs\.io\/ipfs\/|ipfs:\/\/)')
+    if (regExp.test(payload.imageUrl)) {
+      payload.imageUrl = payload.imageUrl.replace(regExp, 'https://cloudflare-ipfs.com/ipfs/')
+    } else {
+      payload.imageUrl =
+        'https://media-cdn.templeofmuse.xyz/api/media-cdn/' +
+        encodeURIComponent(btoa(payload.imageUrl))
+    }
     const unityInstance = (window as any).unityInstance
-    unityInstance.SendMessage('NFT_Manager', 'SetImage', payload)
+    unityInstance.SendMessage('NFT_Manager', 'SetImage', JSON.stringify(payload))
     setDrawerVisible(false)
   }, [nftSlot])
 
