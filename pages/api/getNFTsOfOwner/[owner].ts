@@ -13,6 +13,7 @@ type NFTData = {
     address: string
   },
   tokenId: string,
+  title: string,
   tokenUri: string,
   mediaUri: string,
   // metadata: { [key: string]: any } & {
@@ -37,6 +38,7 @@ const getNFTs = async function(ownerAddress: string, _pageKey?: string): Promise
     return {
       contract: { address: nft.contract.address },
       tokenId: ethers.BigNumber.from(nft.id.tokenId).toString(),
+      title: nft.title,
       tokenUri: nft.tokenUri.gateway,
       mediaUri: nft.media[0]?.gateway,
     }

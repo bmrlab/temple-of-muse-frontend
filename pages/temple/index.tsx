@@ -6,6 +6,7 @@ import Layout from '@/components/layout'
 import renderWebGL from '@/components/temple/render-webgl'
 import ProgressCover from '@/components/temple/progress-cover'
 import NFTsDrawer from '@/components/temple/nfts-drawer'
+import { cdnMediaUri } from '@/lib/nfts'
 
 const Temple: NextLayoutPage = () => {
   let [loadingProgress, setProgress] = useState(0)
@@ -29,15 +30,7 @@ const Temple: NextLayoutPage = () => {
   const onSelectNFT = useCallback((nft) => {
     const payload = {
       slotkey: nftSlot,
-      imageUrl: nft.mediaUri,
-    }
-    const regExp = new RegExp('^(https?:\/\/ipfs\.io\/ipfs\/|ipfs:\/\/)')
-    if (regExp.test(payload.imageUrl)) {
-      payload.imageUrl = payload.imageUrl.replace(regExp, 'https://cloudflare-ipfs.com/ipfs/')
-    } else {
-      payload.imageUrl =
-        'https://media-cdn.templeofmuse.xyz/api/media-cdn/' +
-        encodeURIComponent(btoa(payload.imageUrl))
+      imageUrl: cdnMediaUri(nft.mediaUri),
     }
     const unityInstance = (window as any).unityInstance
     unityInstance.SendMessage('NFT_Manager', 'SetImage', JSON.stringify(payload))

@@ -1,0 +1,11 @@
+.drawerWrapper::-webkit-scrollbar {
+  width: 3px;
+}
+
+.drawerWrapper::-webkit-scrollbar-track {
+  @apply bg-neutral-900;
+}
+
+.drawerWrapper::-webkit-scrollbar-thumb {
+  @apply bg-neutral-800;
+}
