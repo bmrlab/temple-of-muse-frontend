@@ -35,6 +35,7 @@ export default async function handler(
     res.setHeader('Cache-Control', 'public, max-age=2592000');
     response.data.pipe(res)
   } catch(err) {
+    console.log(err)
     res.status(500).send('server error')
   }
 }
