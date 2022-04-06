@@ -23,7 +23,7 @@ export default async function handler(
   })
   // https://github.com/vercel/next.js/blob/canary/examples/api-routes-cors/pages/api/cors.js
   const key = (req.query.key ?? '').toString()
-  const url = Buffer.from(key, 'base64').toString()
+  const url = Buffer.from(decodeURIComponent(key), 'base64').toString()
   try {
     const response = await axios({
       method: 'get',
