@@ -7,9 +7,11 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.5.0",
+    "@types/cors": "^2.8.12",
     "@walletconnect/web3-provider": "^1.7.7",
     "axios": "^0.26.1",
     "clsx": "^1.1.1",
+    "cors": "^2.8.5",
     "ethers": "^5.6.2",
     "next": "latest",
     "react": "^17.0.2",

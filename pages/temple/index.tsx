@@ -27,7 +27,7 @@ const Temple: NextLayoutPage = () => {
   }, [])
 
   const onSelectNFT = useCallback((nft) => {
-    const cdnURL = '/api/media-cdn/' + btoa(nft.mediaUri)
+    const cdnURL = 'https://media-cdn.templeofmuse.xyz/api/media-cdn/' + btoa(nft.mediaUri)
     const payload = JSON.stringify({
       slotkey: nftSlot,
       imageUrl: cdnURL,
