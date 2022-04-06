@@ -27,9 +27,10 @@ const Temple: NextLayoutPage = () => {
   }, [])
 
   const onSelectNFT = useCallback((nft) => {
+    const cdnURL = '/api/media-cdn/' + btoa(nft.mediaUri)
     const payload = JSON.stringify({
       slotkey: nftSlot,
-      imageUrl: nft.mediaUri
+      imageUrl: cdnURL,
     })
     const unityInstance = (window as any).unityInstance
     unityInstance.SendMessage('NFT_Manager', 'SetImage', payload)
