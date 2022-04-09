@@ -9,14 +9,41 @@ import ProgressCover from '@/components/temple/progress-cover'
 import NFTsDrawer from '@/components/temple/nfts-drawer'
 import { cdnMediaUri, NFTData } from '@/lib/nfts'
 
-const saveNFTSlot = (slotkey: string, nft: NFTData) => {
+async function saveNFTSlot(slotkey: string, nft: NFTData) {
   const templeId = 1
-  axios.post(`/api/temples/${templeId}/set-nft-slot`, {
-    slot_key: slotkey,
-    media_uri: nft.mediaUri,
-    contract_address: nft.contract.address,
-    token_id: nft.tokenId,
-  })
+  try {
+    await axios.post(`/api/temples/${templeId}/set-nft-slot`, {
+      slot_key: slotkey,
+      media_uri: nft.mediaUri,
+      contract_address: nft.contract.address,
+      token_id: nft.tokenId,
+    })
+  } catch(err) {
+    console.log(err)
+  }
+}
+
+async function fillSlots() {
+  const unityInstance = (window as any).unityInstance
+  if (!unityInstance) {
+    console.log('unityInstance not ready, retry in 1s')
+    setTimeout(() => fillSlots(), 1000)
+    return
+  }
+  const templeId = 1
+  try {
+    const res = await axios.get(`/api/temples/${templeId}`)
+    const { slots } = res.data
+    for (const slot of slots) {
+      const payload = {
+        slotkey: slot.slot_key,
+        imageUrl: cdnMediaUri(slot.media_uri),
+      }
+      unityInstance.SendMessage('NFT_Manager', 'SetImage', JSON.stringify(payload))
+    }
+  } catch(err) {
+    console.log(err)
+  }
 }
 
 const Temple: NextLayoutPage = () => {
@@ -37,6 +64,12 @@ const Temple: NextLayoutPage = () => {
       document.removeEventListener('selectSlot', listener)
     }
   }, [])
+
+  useEffect(() => {
+    if (loadingProgress >= 100) {
+      fillSlots()
+    }
+  }, [loadingProgress])
 
   const onSelectNFT = useCallback((nft: NFTData) => {
     const payload = {

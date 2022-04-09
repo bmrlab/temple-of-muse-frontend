@@ -1,16 +1,20 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios'
-import { Temple, TempleObjects } from '@/lib/db/models'
+import { Temple, NFTSlot, TempleObjects, NFTSlotObjects } from '@/lib/db/models'
 
+type ResponseData = Temple & {
+  slots: Array<NFTSlot>
+}
 
-async function getTemple(req: NextApiRequest, res: NextApiResponse<Temple|ResponseError>) {
+async function getTemple(req: NextApiRequest, res: NextApiResponse<ResponseData|ResponseError>) {
   const templeId: number = parseInt(req.query.id.toString())
   try {
     const temple = await TempleObjects().where('id', templeId).first()
     if (!temple) {
       res.status(404).json({ 'detail': 'Not Found' })
     } else {
-      res.status(200).json(temple)
+      const slots = await NFTSlotObjects().where('temple_id', temple.id)
+      res.status(200).json({ ...temple, slots })
     }
   } catch(err) {
     console.log(err)
@@ -18,10 +22,9 @@ async function getTemple(req: NextApiRequest, res: NextApiResponse<Temple|Respon
   }
 }
 
-
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Temple|ResponseError>
+  res: NextApiResponse<ResponseData|ResponseError>
 ) {
   switch (req.method) {
     case 'GET':
