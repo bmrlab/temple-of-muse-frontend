@@ -4,7 +4,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "migrate:make": "knex migrate:make",
+    "migrate:make": "knex migrate:make --client mysql",
     "migrate:latest": "knex migrate:latest",
     "migrate:up": "knex migrate:up",
     "migrate:down": "knex migrate:down",
