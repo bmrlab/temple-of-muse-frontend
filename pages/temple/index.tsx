@@ -9,6 +9,7 @@ import ProgressCover from '@/components/temple/progress-cover'
 import NFTsDrawer from '@/components/temple/nfts-drawer'
 import { cdnMediaUri, NFTData } from '@/lib/nfts'
 
+
 async function saveNFTSlot(slotkey: string, nft: NFTData) {
   const templeId = 1
   try {
@@ -47,12 +48,12 @@ async function fillSlots() {
 }
 
 const Temple: NextLayoutPage = () => {
-  let [loadingProgress, setProgress] = useState(0)
+  let [loadingProgress, setLoadingProgress] = useState(0)
   let [drawerVisible, setDrawerVisible] = useState(false)
   let [nftSlot, setNFTSlot] = useState('')
 
   useEffect(() => {
-    let updateProgress = (progress: number) => setProgress(Math.floor(progress * 100))
+    let updateProgress = (progress: number) => setLoadingProgress(Math.floor(progress * 100))
     renderWebGL(updateProgress)
     const listener = (e: any) => {
       setNFTSlot(e.detail)
@@ -85,7 +86,7 @@ const Temple: NextLayoutPage = () => {
   return (
     <div className='relative'>
       <canvas id='unity-canvas'></canvas>
-      <ProgressCover progress={loadingProgress} />
+      <ProgressCover loadingProgress={loadingProgress} />
       <NFTsDrawer visible={drawerVisible} onSelectNFT={onSelectNFT} />
     </div>
   )

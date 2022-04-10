@@ -1,46 +1,26 @@
 import clsx from 'clsx'
-import { useEffect, useState, useMemo, useRef, useCallback } from 'react'
+import { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 
-const usePrevious = <T extends unknown>(value: T): T | undefined => {
-  const ref = useRef<T>()
-  useEffect(() => {
-    ref.current = value
-  })
-  return ref.current
-}
-
-export default function ProgressCover({ progress }: { progress: number }) {
-  let [loadingProgress, setLoadingProgress] = useState(progress)
-  const prevProgress = usePrevious(progress)
+export default function ProgressCover({ loadingProgress }: { loadingProgress: number }) {
+  let [progress, setProgress] = useState(0)
+  const progressMemo = useMemo(() => ({ value: 0 }), [])
 
   let requestId = useRef(0)
-  const updateProgress = useCallback((prev: number, current: number, elapsed: number) => {
-    const newProgress = prev + elapsed
-    if (newProgress <= 100 && newProgress <= current && newProgress >= loadingProgress) {
-      setLoadingProgress(newProgress)
-      requestId.current = window.requestAnimationFrame(() => updateProgress(prev, current, elapsed + 1))
+  const updateProgress = useCallback(() => {
+    if (progressMemo.value < 100) {
+      requestId.current = window.requestAnimationFrame(() => updateProgress())
     }
-  }, [loadingProgress])
+    if (progressMemo.value < loadingProgress) {
+      progressMemo.value = progressMemo.value + 1
+      setProgress(progressMemo.value)
+    }
+  }, [progressMemo, loadingProgress])
   useEffect(() => {
-    updateProgress(prevProgress || 0, progress, 0)
+    updateProgress()
     return () => {
       requestId.current && window.cancelAnimationFrame(requestId.current)
     }
-  })
-
-  let timeoutId = useRef<any>(0)
-  const slowUpdateProgress = useCallback((progress: number) => {
-    if (progress <= 100 && progress >= loadingProgress) {
-      setLoadingProgress(progress)
-      timeoutId.current = setTimeout(() => slowUpdateProgress(progress + 1), 1000)
-    }
-  }, [loadingProgress])
-  useEffect(() => {
-    slowUpdateProgress(progress), [progress, slowUpdateProgress]
-    return () => {
-      timeoutId.current && window.clearTimeout(timeoutId.current)
-    }
-  })
+  }, [updateProgress, loadingProgress])
 
   return (
     <div className={clsx(
@@ -48,7 +28,7 @@ export default function ProgressCover({ progress }: { progress: number }) {
       'text-9xl text-grandslang bg-black',
       'flex items-center justify-center',
        'transition-all duration-1000 ease-in-out',
-       {'opacity-0 invisible': progress >= 100}
-    )}>{loadingProgress}%</div>
+        {'opacity-0 invisible': progress >= 100}
+    )}>{progress}%</div>
   )
 }
