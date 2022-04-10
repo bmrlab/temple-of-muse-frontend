@@ -1,8 +1,11 @@
-export default function renderWebGL(progressCallback) {
+export default function renderWebGL(progressCallback, defaultHeight) {
   var canvas = document.querySelector('#unity-canvas')
+  if (!canvas) {
+    return
+  }
 
   canvas.style.width = window.innerWidth + 'px'
-  canvas.style.height = (window.innerHeight - 200) + 'px'
+  canvas.style.height = (defaultHeight || window.innerHeight) + 'px'
 
   var buildUrl = '/space/Build'
   var loaderUrl = buildUrl + '/temple_of_muse_build.loader.js'

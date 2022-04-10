@@ -1,28 +1,13 @@
 import clsx from 'clsx'
 import axios from 'axios'
-import type { NextLayoutPage } from 'next'
-import { useEffect, useState, useCallback } from 'react'
-import Head from 'next/head'
-import Layout from '@/components/layout'
+import type { NextPage } from 'next'
+import Error from 'next/error'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import renderWebGL from '@/components/temple/render-webgl'
 import ProgressCover from '@/components/temple/progress-cover'
-import NFTsDrawer from '@/components/temple/nfts-drawer'
 import { cdnMediaUri, NFTData } from '@/lib/nfts'
 
-
-async function saveNFTSlot(slotkey: string, nft: NFTData) {
-  const templeId = 1
-  try {
-    await axios.post(`/api/temples/${templeId}/set-nft-slot`, {
-      slot_key: slotkey,
-      media_uri: nft.mediaUri,
-      contract_address: nft.contract.address,
-      token_id: nft.tokenId,
-    })
-  } catch(err) {
-    console.log(err)
-  }
-}
 
 async function fillSlots() {
   const unityInstance = (window as any).unityInstance
@@ -47,14 +32,17 @@ async function fillSlots() {
   }
 }
 
-const Temple: NextLayoutPage = () => {
+const Temple: NextPage = () => {
+  const router = useRouter()
+  const { slug } = router.query
+
   let [loadingProgress, setLoadingProgress] = useState(0)
   let [drawerVisible, setDrawerVisible] = useState(false)
   let [nftSlot, setNFTSlot] = useState('')
 
   useEffect(() => {
     let updateProgress = (progress: number) => setLoadingProgress(Math.floor(progress * 100))
-    renderWebGL(updateProgress, window.innerHeight - 200)
+    renderWebGL(updateProgress)
     const listener = (e: any) => {
       setNFTSlot(e.detail)
       setDrawerVisible(true)
@@ -64,40 +52,23 @@ const Temple: NextLayoutPage = () => {
       updateProgress = () => {}
       document.removeEventListener('selectSlot', listener)
     }
-  }, [])
+  }, [slug])
 
   useEffect(() => {
     if (loadingProgress >= 100) {
       fillSlots()
     }
-  }, [loadingProgress])
+  }, [slug, loadingProgress])
 
-  const onSelectNFT = useCallback((nft: NFTData) => {
-    const payload = {
-      slotkey: nftSlot,
-      imageUrl: cdnMediaUri(nft.mediaUri),
-    }
-    const unityInstance = (window as any).unityInstance
-    unityInstance.SendMessage('NFT_Manager', 'SetImage', JSON.stringify(payload))
-    saveNFTSlot(nftSlot, nft)
-    setDrawerVisible(false)
-  }, [nftSlot])
+  if (slug !== 'bmrlab') {
+    return <Error statusCode={404} />
+  }
 
   return (
     <div className='relative'>
       <canvas id='unity-canvas'></canvas>
       <ProgressCover loadingProgress={loadingProgress} />
-      <NFTsDrawer visible={drawerVisible} onSelectNFT={onSelectNFT} />
     </div>
-  )
-}
-
-
-Temple.getLayout = function getLayout(page) {
-  return (
-    <Layout>
-      {page}
-    </Layout>
   )
 }
 
