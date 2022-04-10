@@ -3,13 +3,13 @@ export type NFTData = {
     address: string
   },
   tokenId: string,
-  title: string,
+  name: string,
   tokenUri: string,
   mediaUri: string,
 }
 
 export type NFTsResponseData = {
-  pageKey: string,
-  totalCount: number,
+  next?: string,
+  previous?: string,
   results: Array<NFTData>
 }

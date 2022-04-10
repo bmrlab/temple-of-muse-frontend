@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
-import { getNFTs, NFTData } from '@/lib/nfts'
+import { getNFTs, NFTData, NFTsResponseData } from '@/lib/nfts'
 
 type Props = {
   walletAddress: string
@@ -8,14 +8,12 @@ type Props = {
 
 export default function NFTs({ walletAddress }: Props) {
   let [pending, setPending] = useState<Boolean>(false)
-  let [nfts, setNFTs] = useState<Array<NFTData>>([])
-  let [pageKey, setPageKey] = useState<string|undefined>()
+  let [nfts, setNFTs] = useState<NFTsResponseData>({results:[]})
 
   useEffect(() => {
     setPending(true)
     getNFTs(walletAddress).then((data) => {
-      setNFTs([ ...data.results ])
-      setPageKey(data.pageKey)
+      setNFTs({ ...data })
       setPending(false)
     })
   }, [walletAddress])
@@ -25,7 +23,7 @@ export default function NFTs({ walletAddress }: Props) {
       {pending && (
         <div>loading ...</div>
       )}
-      {!pending && nfts.map((nft) => {
+      {!pending && nfts.results.map((nft) => {
         return (
           <a
             className='block m-6 w-80'

@@ -2,15 +2,16 @@ import clsx from 'clsx'
 import { useRecoilValue } from 'recoil'
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { walletAddressState } from '@/lib/recoil/wallet'
-import { getNFTs, cdnMediaUri, NFTData } from '@/lib/nfts'
+import { getNFTs, cdnMediaUri, NFTData, NFTsResponseData } from '@/lib/nfts'
 import styles from './nfts-drawer.module.css'
 
 
-const NFTList = ({ nfts, onSelectNFT }: { nfts: Array<NFTData>, onSelectNFT: Function }) => {
-  nfts = nfts.filter((nft) => nft.mediaUri && !/(^data:)|(\.(mp4|gif)$)/.test(nft.mediaUri))
+const NFTList = ({ nfts, onSelectNFT }: { nfts: NFTsResponseData, onSelectNFT: Function }) => {
+  const results = nfts.results
+    .filter((nft) => nft.mediaUri && !/(^data:)|(\.(mp4|gif)$)/.test(nft.mediaUri))
   return (
     <div className='w-full flex items-center justify-center flex-wrap py-4 px-2'>
-      {nfts.map((nft) => {
+      {results.map((nft) => {
         return (
           <div className='block p-2 w-1/2' key={`${nft.contract.address}/${nft.tokenId}`}>
             <div
@@ -27,7 +28,7 @@ const NFTList = ({ nfts, onSelectNFT }: { nfts: Array<NFTData>, onSelectNFT: Fun
                   'WebkitLineClamp': '2',
                   'WebkitBoxOrient': 'vertical',
                   'overflow': 'hidden',
-                }}>{nft.title}</div>
+                }}>{nft.name}</div>
               </div>
             </div>
           </div>
@@ -41,8 +42,7 @@ export default function NFTsDrawer({ visible, onSelectNFT }: { visible: boolean,
   const walletAddress = useRecoilValue(walletAddressState)
 
   let [pending, setPending] = useState<Boolean>(false)
-  let [nfts, setNFTs] = useState<Array<NFTData>>([])
-  let [pageKey, setPageKey] = useState<string|undefined>()
+  let [nfts, setNFTs] = useState<NFTsResponseData>({results:[]})
 
   useEffect(() => {
     if (!walletAddress) {
@@ -50,8 +50,7 @@ export default function NFTsDrawer({ visible, onSelectNFT }: { visible: boolean,
     }
     setPending(true)
     getNFTs(walletAddress).then((data) => {
-      setNFTs([ ...data.results ])
-      setPageKey(data.pageKey)
+      setNFTs({ ...data })
       setPending(false)
     })
   }, [walletAddress])
