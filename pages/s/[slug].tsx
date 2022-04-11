@@ -22,8 +22,8 @@ async function fillSlots() {
     const { slots } = res.data
     for (const slot of slots) {
       const payload = {
-        slotkey: slot.slot_key,
-        imageUrl: cdnMediaUri(slot.media_uri),
+        slotKey: slot.slot_key,
+        imageURL: cdnMediaUri(slot.media_uri),
       }
       unityInstance.SendMessage('NFT_Manager', 'SetImage', JSON.stringify(payload))
     }

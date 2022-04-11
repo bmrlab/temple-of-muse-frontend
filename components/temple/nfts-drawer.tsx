@@ -7,8 +7,9 @@ import styles from './nfts-drawer.module.css'
 
 
 const NFTList = ({ nfts, onSelectNFT }: { nfts: NFTsResponseData, onSelectNFT: Function }) => {
-  const results = nfts.results
-    .filter((nft) => nft.mediaUri && !/(^data:)|(\.(mp4|gif)$)/.test(nft.mediaUri))
+  // const results = nfts.results
+  //   .filter((nft) => nft.mediaUri && !/(^data:)|(\.(mp4|gif)$)/.test(nft.mediaUri))
+  const results = [ ...nfts.results ]
   return (
     <div className='w-full flex items-center justify-center flex-wrap py-4 px-2'>
       {results.map((nft) => {

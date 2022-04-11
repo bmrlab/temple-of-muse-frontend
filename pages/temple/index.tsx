@@ -10,11 +10,11 @@ import NFTsDrawer from '@/components/temple/nfts-drawer'
 import { cdnMediaUri, NFTData } from '@/lib/nfts'
 
 
-async function saveNFTSlot(slotkey: string, nft: NFTData) {
+async function saveNFTSlot(slotKey: string, nft: NFTData) {
   const templeId = 1
   try {
     await axios.post(`/api/temples/${templeId}/set-nft-slot`, {
-      slot_key: slotkey,
+      slot_key: slotKey,
       media_uri: nft.mediaUri,
       contract_address: nft.contract.address,
       token_id: nft.tokenId,
@@ -37,8 +37,8 @@ async function fillSlots() {
     const { slots } = res.data
     for (const slot of slots) {
       const payload = {
-        slotkey: slot.slot_key,
-        imageUrl: cdnMediaUri(slot.media_uri),
+        slotKey: slot.slot_key,
+        imageURL: cdnMediaUri(slot.media_uri),
       }
       unityInstance.SendMessage('NFT_Manager', 'SetImage', JSON.stringify(payload))
     }
@@ -74,8 +74,8 @@ const Temple: NextLayoutPage = () => {
 
   const onSelectNFT = useCallback((nft: NFTData) => {
     const payload = {
-      slotkey: nftSlot,
-      imageUrl: cdnMediaUri(nft.mediaUri),
+      slotKey: nftSlot,
+      imageURL: cdnMediaUri(nft.mediaUri),
     }
     const unityInstance = (window as any).unityInstance
     unityInstance.SendMessage('NFT_Manager', 'SetImage', JSON.stringify(payload))
