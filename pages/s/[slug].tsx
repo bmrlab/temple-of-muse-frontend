@@ -65,7 +65,7 @@ const Temple: NextPage = () => {
   }
 
   return (
-    <div className='relative'>
+    <div className='relative min-h-screen'>
       <canvas id='unity-canvas'></canvas>
       <ProgressCover loadingProgress={loadingProgress} />
     </div>
