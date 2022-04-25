@@ -24,11 +24,11 @@ export default function ProgressCover({ loadingProgress }: { loadingProgress: nu
 
   return (
     <div className={clsx(
-      'absolute left-0 top-0 w-full h-full',
+      'absolute z-10 left-0 top-0 w-full h-full',
       'text-9xl text-grandslang bg-black text-white',
       'flex items-center justify-center',
-       'transition-all duration-1000 ease-in-out',
-        {'opacity-0 invisible': progress >= 100}
+      'transition-all duration-1000 ease-in-out',
+      {'opacity-0 invisible': progress >= 100}
     )}>{progress}%</div>
   )
 }

@@ -68,12 +68,11 @@ export default function Hero() {
         'text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide text-center my-4'
       )}>Show your collection to the world</h2>
 
-      <Link href='/temple'>
-        <a className={clsx(
-          'block w-48 mx-auto my-12 text-center',
-          'border py-2 text-sm bg-white hover:bg-white/90 text-black',
-        )}>TRY DEMO</a>
-      </Link>
+      {/* eslint-disable */}
+      <a href='/temple' className={clsx(
+        'block w-48 mx-auto my-12 text-center',
+        'border py-2 text-sm bg-white hover:bg-white/90 text-black',
+      )}>TRY DEMO</a>
     </div>
   )
 }

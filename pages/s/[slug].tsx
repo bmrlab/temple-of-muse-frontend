@@ -60,7 +60,9 @@ const Temple: NextPage = () => {
     }
   }, [slug, loadingProgress])
 
-  if (slug !== 'bmrlab') {
+  if (!slug) {
+    return <div />
+  } else if (slug !== 'bmrlab') {
     return <Error statusCode={404} />
   }
 

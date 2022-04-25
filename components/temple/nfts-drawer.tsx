@@ -59,7 +59,7 @@ export default function NFTsDrawer({ visible, onSelectNFT }: { visible: boolean,
   return (
     <div className={clsx(
       styles.drawerWrapper,
-      'absolute left-0 top-0 w-80 h-full bg-black overflow-auto',
+      'absolute z-10 left-0 top-0 w-80 h-full bg-black overflow-auto',
       'transition-all duration-300 ease-in-out',
       visible ? 'translate-x-0' : '-translate-x-full'
     )}>
