@@ -2,10 +2,11 @@ import React, { ReactNode } from 'react'
 import Head from 'next/head'
 import clsx from 'clsx'
 
-import SiteHeader from '@/components/layouts/site-header'
-import SiteFooter from '@/components/layouts/site-footer'
+import SiteHeader from './site-header'
+import SiteFooter from './site-footer'
 
 type Props = {
+  footer?: boolean,
   children?: ReactNode
 }
 
@@ -14,7 +15,7 @@ type Props = {
  * to override default html template
  */
 
-export default function Layout({ children }: Props) {
+export default function Layout({ footer=true, children }: Props) {
   return (
     <div className={clsx(
       'overflow-hidden',
@@ -28,7 +29,7 @@ export default function Layout({ children }: Props) {
       </Head>
       <SiteHeader />
       <main className='flex-1'>{children}</main>
-      <SiteFooter />
+      {footer && <SiteFooter />}
     </div>
   )
 }
