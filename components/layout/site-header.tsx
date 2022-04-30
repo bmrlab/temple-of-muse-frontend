@@ -25,6 +25,7 @@ export default function SiteHeader() {
         </Link>
         {/* eslint-disable */}
         <a href='/temple' className='p-2 mx-1'>Temple</a>
+        {/* eslint-enable */}
         <Link href='/assets'>
           <a className='p-2 mx-1'>Assets</a>
         </Link>

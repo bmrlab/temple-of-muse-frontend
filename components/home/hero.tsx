@@ -73,6 +73,7 @@ export default function Hero() {
         'block w-48 mx-auto my-12 text-center',
         'border py-2 text-sm bg-white hover:bg-white/90 text-black',
       )}>TRY DEMO</a>
+      {/* eslint-enable */}
     </div>
   )
 }

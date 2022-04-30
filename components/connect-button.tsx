@@ -18,7 +18,7 @@ const WEB3: {
       package: WalletConnectProvider,
       options: {
         rpc: {
-          1: 'https://eth-mainnet.alchemyapi.io/v2/SjdU6lodzNjnVpJMFQPRtl4SoEzJfCLG'
+          1: 'https://eth-mainnet.alchemyapi.io/v2/CpskmE4wfrZCwpTD-RhG7DMIrSU5Ge1Q'
         }
       }
     }
