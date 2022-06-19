@@ -34,6 +34,27 @@ const getNFTs = async function(
   return { next, previous, results }
 }
 
+const getBMRNFTs = async function(
+  ownerAddress: string,
+  _next?: string,
+  _previous?:string
+): Promise<NFTsResponseData> {
+  const params: any = { owner: ownerAddress }
+  if (_next) { params.next = _next }
+  if (_previous) { params.previous = _previous }
+  const res = await axios.get('https://bmr.art/api/bmrs')
+  const results = res.data.results.map((nft: any): NFTData => {
+    return {
+      contract: { address: '0x0000000000000000000000000000000000000000' },
+      tokenId: nft.generateId,
+      name: nft.name,
+      tokenUri: nft.image,
+      mediaUri: nft.image,
+    }
+  })
+  return { results }
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<NFTsResponseData|ResponseError>
@@ -41,7 +62,8 @@ export default async function handler(
   const ownerAddress = (req.query.owner ?? '').toString()
   const _next = (req.query.next ?? '').toString()
   try {
-    const result = await getNFTs(ownerAddress, _next)
+    // const result = await getNFTs(ownerAddress, _next)
+    const result = await getBMRNFTs(ownerAddress, _next)
     res.status(200).json(result)
   } catch(err) {
     console.log(err)

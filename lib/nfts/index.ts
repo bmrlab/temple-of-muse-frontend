@@ -19,9 +19,10 @@ export const cdnMediaUri = (mediaUri: string): string => {
   } else if (openseaRegExp.test(mediaUri)) {
     // do nothing
   } else if (/^https?/.test(mediaUri)) {
-    mediaUri =
-      'https://media-cdn.templeofmuse.xyz/api/media-cdn/' +
-      encodeURIComponent(btoa(mediaUri))
+    // mediaUri =
+    //   'https://media-cdn.templeofmuse.xyz/api/media-cdn/' +
+    //   encodeURIComponent(btoa(mediaUri))
+    // do nothing
   }
   return mediaUri
 }
