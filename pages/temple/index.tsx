@@ -24,6 +24,17 @@ async function saveNFTSlot(slotKey: string, nft: NFTData) {
   }
 }
 
+async function removeNFTSlot(slotKey: string) {
+  const templeId = 1
+  try {
+    await axios.post(`/api/temples/${templeId}/remove-nft-slot`, {
+      slot_key: slotKey,
+    })
+  } catch(err) {
+    console.log(err)
+  }
+}
+
 async function fillSlots() {
   const unityInstance = (window as any).unityInstance
   if (!unityInstance) {
@@ -83,15 +94,24 @@ const Temple: NextLayoutPage = () => {
     }
   }, [loadingProgress])
 
-  const onSelectNFT = useCallback((nft: NFTData) => {
+  const onSelectNFT = useCallback((nft: NFTData|null) => {
     const unityInstance = (window as any).unityInstance
     if (nftSlot) {
-      const payload = {
-        slotKey: nftSlot,
-        imageURL: cdnMediaUri(nft.mediaUri),
+      if (nft === null) {
+        const payload = {
+          slotKey: nftSlot,
+          imageURL: 'https://www.templeofmuse.xyz/logo-white.png',
+        }
+        unityInstance.SendMessage('NFT_Manager', 'SetImage', JSON.stringify(payload))
+        removeNFTSlot(nftSlot)
+      } else {
+        const payload = {
+          slotKey: nftSlot,
+          imageURL: cdnMediaUri(nft.mediaUri),
+        }
+        unityInstance.SendMessage('NFT_Manager', 'SetImage', JSON.stringify(payload))
+        saveNFTSlot(nftSlot, nft)
       }
-      unityInstance.SendMessage('NFT_Manager', 'SetImage', JSON.stringify(payload))
-      saveNFTSlot(nftSlot, nft)
     } else if (nftSlot3D) {
       const payload = {
         slotKey: nftSlot3D,

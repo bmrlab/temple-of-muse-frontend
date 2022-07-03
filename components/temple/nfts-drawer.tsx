@@ -12,6 +12,10 @@ const NFTList = ({ nfts, onSelectNFT }: { nfts: NFTsResponseData, onSelectNFT: F
   const results = [ ...nfts.results ]
   return (
     <div className='w-full flex items-center justify-center flex-wrap py-4 px-2'>
+      <button
+        className='cursor-pointer w-full text-sm mb-2'
+        onClick={() => onSelectNFT(null)}
+      >clear slot</button>
       {results.map((nft) => {
         return (
           <div className='block p-2 w-1/2' key={`${nft.contract.address}/${nft.tokenId}`}>

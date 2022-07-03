@@ -16,6 +16,7 @@ async function fillSlots() {
     setTimeout(() => fillSlots(), 1000)
     return
   }
+  // unityInstance.SendMessage('Sun', 'SetTime', '{"hour":0,"minutes":0,"seconds":0}')
   const templeId = 1
   try {
     const res = await axios.get(`/api/temples/${templeId}`)
