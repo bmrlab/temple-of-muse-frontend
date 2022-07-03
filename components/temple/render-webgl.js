@@ -10,9 +10,9 @@ export default function renderWebGL(progressCallback, defaultHeight) {
   var buildUrl = '/space/Build'
   var loaderUrl = buildUrl + '/temple_of_muse_build.loader.js'
   var config = {
-    dataUrl: buildUrl + '/temple_of_muse_build.data',
-    frameworkUrl: buildUrl + '/temple_of_muse_build.framework.js',
-    codeUrl: buildUrl + '/temple_of_muse_build.wasm',
+    dataUrl: buildUrl + '/temple_of_muse_build.data.gz',
+    frameworkUrl: buildUrl + '/temple_of_muse_build.framework.js.gz',
+    codeUrl: buildUrl + '/temple_of_muse_build.wasm.gz',
     streamingAssetsUrl: 'StreamingAssets',
     companyName: 'BMR LAB',
     productName: 'Temple Of Muse',
