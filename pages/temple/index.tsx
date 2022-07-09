@@ -100,7 +100,7 @@ const Temple: NextLayoutPage = () => {
       if (nft === null) {
         const payload = {
           slotKey: nftSlot,
-          imageURL: 'https://www.templeofmuse.xyz/logo-white.png',
+          imageURL: 'https://www.templeofmuse.xyz/static/logo-white.png',
         }
         unityInstance.SendMessage('NFT_Manager', 'SetImage', JSON.stringify(payload))
         removeNFTSlot(nftSlot)
