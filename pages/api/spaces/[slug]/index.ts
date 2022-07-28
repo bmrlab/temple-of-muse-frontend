@@ -1,10 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios'
-import { Space } from '@prisma/client'
+import { Space, MediaSlot } from '@prisma/client'
 import prisma from '@/lib/prisma'
 
-async function getSpace(req: NextApiRequest, res: NextApiResponse<Space|ResponseError>) {
-  const slug: number = (req.query.slug ?? '').toString()
+type ResponseData = Space & {
+  mediaSlots: MediaSlot[]
+}
+
+async function getSpace(req: NextApiRequest, res: NextApiResponse<ResponseData|ResponseError>) {
+  const slug: string = (req.query.slug ?? '').toString()
   try {
     const space = await prisma.space.findUnique({
       where: { slug },
@@ -12,7 +16,11 @@ async function getSpace(req: NextApiRequest, res: NextApiResponse<Space|Response
         mediaSlots: true,
       },
     })
-    res.status(200).json({ ...space })
+    if (!space) {
+      res.status(404).json({ 'detail': 'Not Found' })
+    } else {
+      res.status(200).json(space)
+    }
   } catch(err) {
     console.log(err)
     res.status(500).json({ 'detail': 'server error' })
@@ -21,7 +29,7 @@ async function getSpace(req: NextApiRequest, res: NextApiResponse<Space|Response
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Space|ResponseError>
+  res: NextApiResponse<ResponseData|ResponseError>
 ) {
   switch (req.method) {
     case 'GET':

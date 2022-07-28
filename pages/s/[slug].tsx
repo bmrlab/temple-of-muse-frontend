@@ -115,8 +115,8 @@ const Space: NextPage<{slug: string}> = ({ slug }) => {
   )
 }
 
-Space.getInitialProps = async function({ query }): Promise<InitialQueryType> {
-  const slug = query.slug ?? ''
+Space.getInitialProps = async function({ query }): Promise<{slug:string}> {
+  const slug = (query.slug ?? '').toString()
   return {
     slug
   }
