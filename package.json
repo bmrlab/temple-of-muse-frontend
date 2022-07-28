@@ -12,8 +12,12 @@
     "seed:create": "knex seed:make",
     "seed:run": "knex seed:run"
   },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "dependencies": {
     "@headlessui/react": "^1.5.0",
+    "@prisma/client": "^4.1.0",
     "@types/cors": "^2.8.12",
     "@walletconnect/web3-provider": "^1.7.7",
     "axios": "^0.26.1",
@@ -37,7 +41,9 @@
     "postcss": "^8.4.5",
     "prettier": "^2.5.1",
     "prettier-plugin-tailwindcss": "^0.1.1",
+    "prisma": "^4.1.0",
     "tailwindcss": "^3.0.7",
+    "ts-node": "^10.9.1",
     "typescript": "4.5.4"
   }
 }
