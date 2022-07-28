@@ -25,22 +25,21 @@ const getMobileDetect = (userAgent: NavigatorID['userAgent']) => {
   }
 }
 
-async function fillSlots() {
+async function fillSlots(slug: string) {
   const unityInstance = (window as any).unityInstance
   if (!unityInstance) {
     console.log('unityInstance not ready, retry in 1s')
-    setTimeout(() => fillSlots(), 1000)
+    setTimeout(() => fillSlots(slug), 1000)
     return
   }
   // unityInstance.SendMessage('Sun', 'SetTime', '{"hour":0,"minutes":0,"seconds":0}')
-  const templeId = 1
   try {
-    const res = await axios.get(`/api/temples/${templeId}`)
-    const { slots } = res.data
-    for (const slot of slots) {
+    const res = await axios.get(`/api/spaces/${slug}`)
+    const { mediaSlots } = res.data
+    for (const mediaSlot of mediaSlots) {
       const payload = {
-        slotKey: slot.slot_key,
-        imageURL: cdnMediaUri(slot.media_uri),
+        slotKey: mediaSlot.slotKey,
+        imageURL: cdnMediaUri(mediaSlot.mediaUri),
       }
       unityInstance.SendMessage('NFT_Manager', 'SetImage', JSON.stringify(payload))
     }
@@ -49,10 +48,7 @@ async function fillSlots() {
   }
 }
 
-const Temple: NextPage = () => {
-  const router = useRouter()
-  const { slug } = router.query
-
+const Space: NextPage<{slug: string}> = ({ slug }) => {
   let [mobileDetect, setMobileDetect] = useState(getMobileDetect('SSR'))
   let [loadingProgress, setLoadingProgress] = useState(0)
   let [drawerVisible, setDrawerVisible] = useState(false)
@@ -79,15 +75,16 @@ const Temple: NextPage = () => {
 
   useEffect(() => {
     if (loadingProgress >= 100) {
-      fillSlots()
+      fillSlots(slug)
     }
   }, [slug, loadingProgress])
 
-  if (!slug) {
-    return <div />
-  } else if (slug !== 'bmrlab') {
-    return <Error statusCode={404} />
-  } else if (mobileDetect.isMobile()) {
+  // if (!slug) {
+  //   return <div />
+  // } else if (slug !== 'bmrlab') {
+  //   return <Error statusCode={404} />
+  // } else
+  if (mobileDetect.isMobile()) {
     return <div className='min-h-screen flex flex-col items-center justify-center bg-black text-white'>
       <div
         className='w-12 h-12 my-4'
@@ -118,4 +115,11 @@ const Temple: NextPage = () => {
   )
 }
 
-export default Temple
+Space.getInitialProps = async function({ query }): Promise<InitialQueryType> {
+  const slug = query.slug ?? ''
+  return {
+    slug
+  }
+}
+
+export default Space
