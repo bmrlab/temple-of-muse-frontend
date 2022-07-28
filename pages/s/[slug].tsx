@@ -72,7 +72,7 @@ const Space: NextPage<{slug: string}> = ({ slug }) => {
       let updateProgress = (progress: number) => setLoadingProgress(Math.floor(progress * 100))
       let config = null
       try {
-        config = JSON.parse(space.config)
+        config = JSON.parse(space.config as string)
       } catch(err) {}
       renderWebGL(updateProgress, null, config)
       return () => {
@@ -83,7 +83,7 @@ const Space: NextPage<{slug: string}> = ({ slug }) => {
 
   useEffect(() => {
     if (loadingProgress >= 100) {
-      fillSlots(space)
+      fillSlots(space!)
     }
   }, [space, loadingProgress])
 
