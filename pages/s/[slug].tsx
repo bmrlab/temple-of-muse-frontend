@@ -62,7 +62,7 @@ const Space: NextPage<{slug: string}> = ({ slug }) => {
   }, [])
 
   useEffect(() => {
-    if (mobileDetect.isMobile()) {
+    if (!mobileDetect.isDesktop()) {
       return
     } else {
       let updateProgress = (progress: number) => setLoadingProgress(Math.floor(progress * 100))
@@ -84,7 +84,7 @@ const Space: NextPage<{slug: string}> = ({ slug }) => {
   // } else if (slug !== 'bmrlab') {
   //   return <Error statusCode={404} />
   // } else
-  if (mobileDetect.isMobile()) {
+  if (!mobileDetect.isDesktop()) {
     return <div className='min-h-screen flex flex-col items-center justify-center bg-black text-white'>
       <div
         className='w-12 h-12 my-4'

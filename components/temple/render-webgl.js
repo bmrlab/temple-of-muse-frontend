@@ -7,7 +7,10 @@ export default function renderWebGL(progressCallback, defaultHeight) {
   canvas.style.width = window.innerWidth + 'px'
   canvas.style.height = (defaultHeight || window.innerHeight) + 'px'
 
-  var buildUrl = '/space/Build'
+  var buildUrl = 'https://dww4fzr5k5i0x.cloudfront.net/temple/space-bmr-expo/Build'
+  // var buildUrl = 'https://dww4fzr5k5i0x.cloudfront.net/temple/space-simple/Build'
+  // var buildUrl = 'https://bmrnft-public.s3.us-west-1.amazonaws.com/temple/space-simple/Build'
+  // var buildUrl = '/space/Build'
   var loaderUrl = buildUrl + '/temple_of_muse_build.loader.js'
   var config = {
     dataUrl: buildUrl + '/temple_of_muse_build.data.gz',
