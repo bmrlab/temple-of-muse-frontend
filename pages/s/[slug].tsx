@@ -4,9 +4,14 @@ import type { NextPage } from 'next'
 import Error from 'next/error'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { Space, MediaSlot } from '@prisma/client'
 import renderWebGL from '@/components/temple/render-webgl'
 import ProgressCover from '@/components/temple/progress-cover'
 import { cdnMediaUri, NFTData } from '@/lib/nfts'
+
+type SpaceData = Space & {
+  mediaSlots: MediaSlot[]
+}
 
 const getMobileDetect = (userAgent: NavigatorID['userAgent']) => {
   const isAndroid = () => Boolean(userAgent.match(/Android/i))
@@ -25,34 +30,27 @@ const getMobileDetect = (userAgent: NavigatorID['userAgent']) => {
   }
 }
 
-async function fillSlots(slug: string) {
+async function fillSlots(space: SpaceData) {
   const unityInstance = (window as any).unityInstance
   if (!unityInstance) {
     console.log('unityInstance not ready, retry in 1s')
-    setTimeout(() => fillSlots(slug), 1000)
+    setTimeout(() => fillSlots(space), 1000)
     return
   }
   // unityInstance.SendMessage('Sun', 'SetTime', '{"hour":0,"minutes":0,"seconds":0}')
-  try {
-    const res = await axios.get(`/api/spaces/${slug}`)
-    const { mediaSlots } = res.data
-    for (const mediaSlot of mediaSlots) {
-      const payload = {
-        slotKey: mediaSlot.slotKey,
-        imageURL: cdnMediaUri(mediaSlot.mediaUri),
-      }
-      unityInstance.SendMessage('NFT_Manager', 'SetImage', JSON.stringify(payload))
+  for (const mediaSlot of space.mediaSlots) {
+    const payload = {
+      slotKey: mediaSlot.slotKey,
+      imageURL: cdnMediaUri(mediaSlot.mediaUri),
     }
-  } catch(err) {
-    console.log(err)
+    unityInstance.SendMessage('NFT_Manager', 'SetImage', JSON.stringify(payload))
   }
 }
 
 const Space: NextPage<{slug: string}> = ({ slug }) => {
-  let [mobileDetect, setMobileDetect] = useState(getMobileDetect('SSR'))
-  let [loadingProgress, setLoadingProgress] = useState(0)
-  let [drawerVisible, setDrawerVisible] = useState(false)
-  let [nftSlot, setNFTSlot] = useState('')
+  const [mobileDetect, setMobileDetect] = useState(getMobileDetect('SSR'))
+  const [loadingProgress, setLoadingProgress] = useState(0)
+  const [space, setSpace] = useState<SpaceData|null>(null)
 
   useEffect(() => {
     if (typeof window.navigator !== 'undefined') {
@@ -62,22 +60,32 @@ const Space: NextPage<{slug: string}> = ({ slug }) => {
   }, [])
 
   useEffect(() => {
-    if (!mobileDetect.isDesktop()) {
+    axios.get(`/api/spaces/${slug}`).then((res) => {
+      setSpace(res.data)
+    })
+  }, [slug])
+
+  useEffect(() => {
+    if (!space || !mobileDetect.isDesktop()) {
       return
     } else {
       let updateProgress = (progress: number) => setLoadingProgress(Math.floor(progress * 100))
-      renderWebGL(updateProgress)
+      let config = null
+      try {
+        config = JSON.parse(space.config)
+      } catch(err) {}
+      renderWebGL(updateProgress, null, config)
       return () => {
         updateProgress = () => {}
       }
     }
-  }, [slug, mobileDetect])
+  }, [space, mobileDetect])
 
   useEffect(() => {
     if (loadingProgress >= 100) {
-      fillSlots(slug)
+      fillSlots(space)
     }
-  }, [slug, loadingProgress])
+  }, [space, loadingProgress])
 
   // if (!slug) {
   //   return <div />

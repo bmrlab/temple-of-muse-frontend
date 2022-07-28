@@ -13,11 +13,13 @@ datasource db {
 
 model Space {
   id                Int         @id @default(autoincrement())
-  ownerAddress      String
+  ownerAddress      String      @db.VarChar(50)
   // info
   slug              String      @unique
-  title             String      @default("")
-  description       String      @default("")
+  title             String      @db.VarChar(100)
+  description       String?     @db.VarChar(200)
+  // config
+  config            String?     @db.Text
   // db only
   createdAt         DateTime    @default(now())
   updatedAt         DateTime    @updatedAt
@@ -31,10 +33,11 @@ model MediaSlot {
   spaceId           Int
   space             Space       @relation(fields: [spaceId], references: [id])
   // slot
-  slotKey           String
-  mediaUri          String
-  contractAddress   String
-  tokenId           String
+  slotKey           String      @db.VarChar(50)
+  mediaUri          String      @db.VarChar(200)
+  contractAddress   String?     @db.VarChar(50)
+  tokenId           String?     @db.VarChar(100)
+  descHtml          String?     @db.Text
   // db only
   createdAt         DateTime    @default(now())
   updatedAt         DateTime    @updatedAt
