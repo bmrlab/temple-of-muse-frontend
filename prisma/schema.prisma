@@ -10,3 +10,32 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Space {
+  id                Int         @id @default(autoincrement())
+  ownerAddress      String
+  // info
+  slug              String      @unique
+  title             String      @default("")
+  description       String      @default("")
+  // db only
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  // relation
+  mediaSlots        MediaSlot[]
+}
+
+model MediaSlot {
+  id                Int         @id @default(autoincrement())
+  // relation
+  spaceId           Int
+  space             Space       @relation(fields: [spaceId], references: [id])
+  // slot
+  slotKey           String
+  mediaUri          String
+  contractAddress   String
+  tokenId           String
+  // db only
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+}
