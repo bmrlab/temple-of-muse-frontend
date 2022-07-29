@@ -79,7 +79,8 @@ const MEDIA_SLOTS_DATA: [number,string,string,string][] = [
 
   [2,'NFT_Area_13','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example1.png','Example 1'],
   [2,'NFT_Area_28','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example2.jpg','Example 2'],
-  [2,'NFT_Area_54','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example3.png','Example 3'],
+  // [2,'NFT_Area_54','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example3.png','Example 3'],
+  [2,'NFT_Area_54','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4'],
 ]
 
 async function main() {

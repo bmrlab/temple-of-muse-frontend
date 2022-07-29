@@ -8,15 +8,15 @@ export default function renderWebGL(progressCallback, defaultHeight, config) {
   canvas.style.height = (defaultHeight || window.innerHeight) + 'px'
 
   if (!config) {
-    var buildUrl = 'https://dww4fzr5k5i0x.cloudfront.net/temple/space-bmr-expo/Build'
+    // var buildUrl = 'https://dww4fzr5k5i0x.cloudfront.net/temple/space-bmr-expo/Build'
     // var buildUrl = 'https://dww4fzr5k5i0x.cloudfront.net/temple/space-simple/Build'
     // var buildUrl = 'https://bmrnft-public.s3.us-west-1.amazonaws.com/temple/space-simple/Build'
-    // var buildUrl = '/space/Build'
+    var buildUrl = '/space/Build'
     var config = {
-      loaderUrl: buildUrl + '/temple_of_muse_build.loader.js',
-      dataUrl: buildUrl + '/temple_of_muse_build.data.gz',
-      frameworkUrl: buildUrl + '/temple_of_muse_build.framework.js.gz',
-      codeUrl: buildUrl + '/temple_of_muse_build.wasm.gz',
+      loaderUrl: buildUrl + '/temple_of_muse_build_webgl.loader.js',
+      dataUrl: buildUrl + '/temple_of_muse_build_webgl.data.gz',
+      frameworkUrl: buildUrl + '/temple_of_muse_build_webgl.framework.js.gz',
+      codeUrl: buildUrl + '/temple_of_muse_build_webgl.wasm.gz',
       streamingAssetsUrl: 'StreamingAssets',
       companyName: 'BMR LAB',
       productName: 'Temple Of Muse',
