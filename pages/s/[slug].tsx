@@ -3,31 +3,15 @@ import axios from 'axios'
 import type { NextPage } from 'next'
 import Error from 'next/error'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useMemo, useEffect, useState } from 'react'
 import { Space, MediaSlot } from '@prisma/client'
 import renderWebGL from '@/components/temple/render-webgl'
 import ProgressCover from '@/components/temple/progress-cover'
 import { cdnMediaUri, NFTData } from '@/lib/nfts'
+import { getMobileDetect } from '@/lib/utils'
 
 type SpaceData = Space & {
   mediaSlots: MediaSlot[]
-}
-
-const getMobileDetect = (userAgent: NavigatorID['userAgent']) => {
-  const isAndroid = () => Boolean(userAgent.match(/Android/i))
-  const isIos = () => Boolean(userAgent.match(/iPhone|iPad|iPod/i))
-  const isOpera = () => Boolean(userAgent.match(/Opera Mini/i))
-  const isWindows = () => Boolean(userAgent.match(/IEMobile/i))
-  const isSSR = () => Boolean(userAgent.match(/SSR/i))
-  const isMobile = () => Boolean(isAndroid() || isIos() || isOpera() || isWindows())
-  const isDesktop = () => Boolean(!isMobile() && !isSSR())
-  return {
-    isMobile,
-    isDesktop,
-    isAndroid,
-    isIos,
-    isSSR,
-  }
 }
 
 async function fillSlots(space: SpaceData) {
@@ -51,6 +35,15 @@ const Space: NextPage<{slug: string}> = ({ slug }) => {
   const [mobileDetect, setMobileDetect] = useState(getMobileDetect('SSR'))
   const [loadingProgress, setLoadingProgress] = useState(0)
   const [space, setSpace] = useState<SpaceData|null>(null)
+  const [activeSlotKey, setActiveSlotKey] = useState('')
+
+  const activeMediaSlot = useMemo<MediaSlot|null>(() => {
+    if (!space || !activeSlotKey) {
+      return null
+    }
+    const mediaSlot = space.mediaSlots.find((item) => item.slotKey === activeSlotKey)
+    return mediaSlot
+  }, [space, activeSlotKey])
 
   useEffect(() => {
     if (typeof window.navigator !== 'undefined') {
@@ -68,16 +61,20 @@ const Space: NextPage<{slug: string}> = ({ slug }) => {
   useEffect(() => {
     if (!space || !mobileDetect.isDesktop()) {
       return
-    } else {
-      let updateProgress = (progress: number) => setLoadingProgress(Math.floor(progress * 100))
-      let config = null
-      try {
-        config = JSON.parse(space.config as string)
-      } catch(err) {}
-      renderWebGL(updateProgress, null, config)
-      return () => {
-        updateProgress = () => {}
-      }
+    }
+    let updateProgress = (progress: number) => setLoadingProgress(Math.floor(progress * 100))
+    let config = null
+    try {
+      config = JSON.parse(space.config as string)
+    } catch(err) {}
+    renderWebGL(updateProgress, null, config)
+    const listener = (e: any) => {
+      setActiveSlotKey(e.detail)
+    }
+    document.addEventListener('selectSlot', listener)
+    return () => {
+      updateProgress = () => {}
+      document.removeEventListener('selectSlot', listener)
     }
   }, [space, mobileDetect])
 
@@ -86,6 +83,12 @@ const Space: NextPage<{slug: string}> = ({ slug }) => {
       fillSlots(space!)
     }
   }, [space, loadingProgress])
+
+  const MediaDetailDrawer = ({ activeMediaSlot }: { activeMediaSlot: MediaSlot }) => {
+    return <div className='fixed left-0 top-0 w-full h-full bg-black text-white'>
+      { activeMediaSlot.descHtml }
+    </div>
+  }
 
   // if (!slug) {
   //   return <div />
@@ -113,14 +116,13 @@ const Space: NextPage<{slug: string}> = ({ slug }) => {
         </svg>
       </a>
     </div>
-  }
-
-  return (
-    <div className='relative min-h-screen'>
+  } else {
+    return <div className='relative min-h-screen'>
       <canvas id='unity-canvas'></canvas>
       <ProgressCover loadingProgress={loadingProgress} />
+      {activeMediaSlot && <MediaDetailDrawer activeMediaSlot={activeMediaSlot} />}
     </div>
-  )
+  }
 }
 
 Space.getInitialProps = async function({ query }): Promise<{slug:string}> {
