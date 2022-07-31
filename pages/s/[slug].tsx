@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import axios from 'axios'
 import type { NextPage } from 'next'
 import Error from 'next/error'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useMemo, useEffect, useState } from 'react'
 import { Space, MediaSlot } from '@prisma/client'
@@ -42,7 +43,7 @@ const Space: NextPage<{slug: string}> = ({ slug }) => {
       return null
     }
     const mediaSlot = space.mediaSlots.find((item) => item.slotKey === activeSlotKey)
-    return mediaSlot
+    return mediaSlot || null
   }, [space, activeSlotKey])
 
   useEffect(() => {
@@ -67,7 +68,9 @@ const Space: NextPage<{slug: string}> = ({ slug }) => {
     try {
       config = JSON.parse(space.config as string)
     } catch(err) {}
-    renderWebGL(updateProgress, null, config)
+    if (!(window as any).unityInstance) {
+      renderWebGL(updateProgress, null, config)
+    }
     const listener = (e: any) => {
       setActiveSlotKey(e.detail)
     }
@@ -85,8 +88,37 @@ const Space: NextPage<{slug: string}> = ({ slug }) => {
   }, [space, loadingProgress])
 
   const MediaDetailDrawer = ({ activeMediaSlot }: { activeMediaSlot: MediaSlot }) => {
-    return <div className='fixed left-0 top-0 w-full h-full bg-black text-white'>
-      { activeMediaSlot.descHtml }
+    return <div className='fixed left-0 top-0 w-full h-full flex items-center justify-center'>
+      <div className='w-1/2 h-1/2 text-white relative'>
+        {/* black bg with rounded corner */}
+        <div
+          className='absolute top-0 left-0 w-full h-full bg-black rounded-3xl'
+          style={{'backdropFilter': 'blur(40px)', 'background': 'rgba(7, 7, 7, 0.3)'}}
+        ></div>
+        <div className='relative flex item-stretch w-full h-full'>
+          <div className='w-1/2 py-8'>
+            {/\.mp4$/.test(activeMediaSlot.mediaUri) && <video
+              src={activeMediaSlot.mediaUri} autoPlay muted
+              className='w-full h-full -translate-x-16'
+            ></video>}
+            {!/\.mp4$/.test(activeMediaSlot.mediaUri) && <div
+              style={{'backgroundImage':`url(${activeMediaSlot.mediaUri})`}}
+              className='w-full h-full bg-contain bg-no-repeat bg-left -translate-x-16'
+            ></div>}
+          </div>
+          <div className='w-1/2 pr-24'>
+            <div className='text-2xl font-extralight py-8'>{ activeMediaSlot.name }</div>
+            <div className='text-sm font-light pb-8 leading-loose'>{ activeMediaSlot.description }</div>
+          </div>
+        </div>
+        <div
+          className='absolute right-6 top-6 w-[31px] h-[31px] cursor-pointer rounded-full border border-white/50 rotate-45'
+          onClick={() => setActiveSlotKey('')}
+        >
+          <div className='absolute left-2 right-2 h-[1px] top-[14px] bg-white'></div>
+          <div className='absolute top-2 bottom-2 w-[1px] left-[14px] bg-white'></div>
+        </div>
+      </div>
     </div>
   }
 
@@ -95,6 +127,7 @@ const Space: NextPage<{slug: string}> = ({ slug }) => {
   // } else if (slug !== 'bmrlab') {
   //   return <Error statusCode={404} />
   // } else
+
   if (!mobileDetect.isDesktop()) {
     return <div className='min-h-screen flex flex-col items-center justify-center bg-black text-white'>
       <div

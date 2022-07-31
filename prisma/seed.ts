@@ -79,11 +79,27 @@ const MEDIA_SLOTS_DATA: [number,string,string,string,string][] = [
 
   [2,'NFT_Area_13','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example1.png','Example 1','Example 1'],
   [2,'NFT_Area_28','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example2.jpg','Example 2','Example 2'],
-  // [2,'NFT_Area_54','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example3.png','Example 3','Example 3'],
-  [2,'NFT_Area_54','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4','Example 4'],
+  [2,'NFT_Area_54','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example3.png','Example 3','Example 3'],
+  [2,'NFT_Area_75','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4','Example 4'],
+  [2,'NFT_Area_39','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4','Example 4'],
+  [2,'NFT_Area_16','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4','Example 4'],
+  [2,'NFT_Area_17','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4','Example 4'],
+  [2,'NFT_Area_70','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4','Example 4'],
+  [2,'NFT_Area_48','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4','Example 4'],
+  [2,'NFT_Area_79','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4','Example 4'],
+  [2,'NFT_Area_34','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4','Example 4'],
+  [2,'NFT_Area_40','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4','Example 4'],
 ]
 
 async function main() {
+  // clear first
+  await prisma.mediaSlot.deleteMany({
+    where: { spaceId: { in: [1, 2] } }
+  })
+  await prisma.space.deleteMany({
+    where: { id: { in: [1, 2] } }
+  })
+  // spaces
   const spacesData = SPACES_DATA.map((line: [number,string,string,string,string,string]) => {
     const [id, ownerAddress, slug, title, description, config] = line
     return { id, ownerAddress, slug, title, description, config }
@@ -91,6 +107,7 @@ async function main() {
   await prisma.space.createMany({
     data: spacesData
   })
+  // slots
   const mediaSlotsData = MEDIA_SLOTS_DATA.map((line: [number,string,string,string,string]) => {
     const [spaceId, slotKey, mediaUri, name, description] = line
     return { spaceId, slotKey, mediaUri, name, description }
