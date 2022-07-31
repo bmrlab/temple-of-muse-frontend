@@ -37,7 +37,9 @@ model MediaSlot {
   mediaUri          String      @db.VarChar(200)
   contractAddress   String?     @db.VarChar(50)
   tokenId           String?     @db.VarChar(100)
-  descHtml          String?     @db.Text
+  // token metadata: name/desc
+  name              String?     @db.VarChar(100)
+  description       String?     @db.Text
   // db only
   createdAt         DateTime    @default(now())
   updatedAt         DateTime    @updatedAt
