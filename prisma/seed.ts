@@ -2,8 +2,9 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 const SPACES_DATA: [number,string,string,string,string,string][] = [
-  [1,'0x4a3e40B76a946495a6255B521240487e71f73d2C','bmrlab','BMR Lab\'s collection','All NFTs collected by BMR Lab\'s members','{"loaderUrl":"https://dww4fzr5k5i0x.cloudfront.net/temple/space-bmr-expo/Build/temple_of_muse_build.loader.js","dataUrl":"https://dww4fzr5k5i0x.cloudfront.net/temple/space-bmr-expo/Build/temple_of_muse_build.data.gz","frameworkUrl":"https://dww4fzr5k5i0x.cloudfront.net/temple/space-bmr-expo/Build/temple_of_muse_build.framework.js.gz","codeUrl":"https://dww4fzr5k5i0x.cloudfront.net/temple/space-bmr-expo/Build/temple_of_muse_build.wasm.gz","streamingAssetsUrl":"StreamingAssets","companyName":"BMR LAB","productName":"Temple Of Muse","productVersion":"0.1"}'],
-  [2,'0x4a3e40B76a946495a6255B521240487e71f73d2C','818','Tezign 818','Tezign 818 Annual Exhibition','{"loaderUrl":"https://dww4fzr5k5i0x.cloudfront.net/temple/space-simple/Build/temple_of_muse_build.loader.js","dataUrl":"https://dww4fzr5k5i0x.cloudfront.net/temple/space-simple/Build/temple_of_muse_build.data.gz","frameworkUrl":"https://dww4fzr5k5i0x.cloudfront.net/temple/space-simple/Build/temple_of_muse_build.framework.js.gz","codeUrl":"https://dww4fzr5k5i0x.cloudfront.net/temple/space-simple/Build/temple_of_muse_build.wasm.gz","streamingAssetsUrl":"StreamingAssets","companyName":"BMR LAB","productName":"Temple Of Muse","productVersion":"0.1"}'],
+  [1,'0x4a3e40B76a946495a6255B521240487e71f73d2C','bmrlab','BMR Lab\'s collection','All NFTs collected by BMR Lab\'s members','{"loaderUrl":"https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-bmr-expo/Build/temple_of_muse_build_webgl.loader.js","dataUrl":"https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-bmr-expo/Build/temple_of_muse_build_webgl.data.gz","frameworkUrl":"https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-bmr-expo/Build/temple_of_muse_build_webgl.framework.js.gz","codeUrl":"https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-bmr-expo/Build/temple_of_muse_build_webgl.wasm.gz","streamingAssetsUrl":"StreamingAssets","companyName":"BMR LAB","productName":"Temple Of Muse","productVersion":"0.1"}'],
+  [2,'0x4a3e40B76a946495a6255B521240487e71f73d2C','818','Tezign 818','Tezign 818 Annual Exhibition','{"loaderUrl":"https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-simple/Build/temple_of_muse_build_webgl.loader.js","dataUrl":"https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-simple/Build/temple_of_muse_build_webgl.data.gz","frameworkUrl":"https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-simple/Build/temple_of_muse_build_webgl.framework.js.gz","codeUrl":"https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-simple/Build/temple_of_muse_build_webgl.wasm.gz","streamingAssetsUrl":"StreamingAssets","companyName":"BMR LAB","productName":"Temple Of Muse","productVersion":"0.1"}'],
+  [3,'0x4a3e40B76a946495a6255B521240487e71f73d2C','simple','Simple','Simple','{"loaderUrl":"https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-c/Build/temple_of_muse_small.loader.js","dataUrl":"https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-c/Build/temple_of_muse_small.data.gz","frameworkUrl":"https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-c/Build/temple_of_muse_small.framework.js.gz","codeUrl":"https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-c/Build/temple_of_muse_small.wasm.gz","streamingAssetsUrl":"StreamingAssets","companyName":"BMR LAB","productName":"Temple Of Muse","productVersion":"0.1"}'],
 ]
 
 const MEDIA_SLOTS_DATA: [number,string,string,string,string][] = [
@@ -77,18 +78,19 @@ const MEDIA_SLOTS_DATA: [number,string,string,string,string][] = [
   [1,'NFT_Area_79','https://dww4fzr5k5i0x.cloudfront.net/image/%230002_archimedes.jpg','#0002_archimedes','#0002_archimedes'],
   [1,'NFT_Area_54','https://dww4fzr5k5i0x.cloudfront.net/image/%230034_fleming.jpg','#0034_fleming','#0034_fleming'],
 
-  [2,'NFT_Area_13','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example1.png','Example 1','Example 1'],
-  [2,'NFT_Area_28','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example2.jpg','Example 2','Example 2'],
-  [2,'NFT_Area_54','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example3.png','Example 3','Example 3'],
-  [2,'NFT_Area_75','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4','Example 4'],
-  [2,'NFT_Area_39','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4','Example 4'],
-  [2,'NFT_Area_16','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4','Example 4'],
-  [2,'NFT_Area_17','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4','Example 4'],
-  [2,'NFT_Area_70','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4','Example 4'],
-  [2,'NFT_Area_48','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4','Example 4'],
-  [2,'NFT_Area_79','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4','Example 4'],
-  [2,'NFT_Area_34','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4','Example 4'],
-  [2,'NFT_Area_40','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4','Example 4'],
+  [2,'NFT_Area_13','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/01.jpg','特赞第一个感恩节','2014/11 百无聊赖，感激已经开始在特赞社区活跃起来的朋友们。'],
+  [2,'NFT_Area_28','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/02.jpg','每当好事发生','2015/10 2015年10月29日特赞第一版网站上线了付费功能，支付99元可以使用特赞的对接服务。上线不久，就有人支付了第一笔费用。感受到一种意外的信任感，用这99元请全体同学庆祝，正好够买人头份的“可爱多”冰激凌。从此，每逢好事，特赞人就会吃可爱多。到现在已经吃了上千只可爱多。'],
+  [2,'NFT_Area_54','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/03.jpg','发现特赞海报','2014/01 特赞第一次线下活动，在2013年12月31日举行，居然有超过50位朋友来参加'],
+  [2,'NFT_Area_75','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/04.jpg','发布全球首份《设计人工智能报告》','2018/4 2018年，特赞与同济大学设计创意学院联合创立的‘D&AI设计与人工智能实验室’ 发布第一份《2017设计与人工智能报告》，回应纠葛在人工智能与设计的未来之间的迷思，报告发布至今已被100万+人浏览阅读。'],
+  [2,'NFT_Area_39','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/05.jpg','人民日报上的特赞','2019/1 若把人工智能和人的大脑进行类比，这些应用都是追求更高、更快、更强、更准的“左脑”范畴。但要实现人机协同，还需延展出具有空间感、形象感、想象力、创造力等方面的人工智能“右脑”，让机器更善意、更有温度。——特赞创始人范凌'],
+  [2,'NFT_Area_16','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/06.jpg','#用插话说感谢你#','特赞和微博动漫联合发起暖心campaign，从#感恩许愿树# 到 #用插画说感谢你# ，两周多时间，特赞召集100+优秀插画师一起发声，打造超人气话题。插画师的力量，在小小话题下被不断放大！'],
+  [2,'NFT_Area_17','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/07.jpg','特赞作为亚太区唯一内容科技公司上榜 Forrester MRM报告','2022/3 Forrester 是全球知名独立技术和市场调研公司 特赞内容科技,上榜Forrester 2022年Q1 MRM 报告 特赞入选 Forrester Now Tech MRM 报告 成为亚太区唯一被收录的内容科技厂商'],
+  [2,'NFT_Area_70','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/08.jpg','特赞正式成为独角兽','2021/11 2021年特赞完成了D1轮融资，成为估值超过10亿美金的内容科技独角兽。2015年，以科技赋能想象力为使命，特赞开始了创业之路。创业以来，我们始终专注于技术与创意的融合，致力于搭建创意内容的数字新基建。一路走来，我们要感谢400多位深度探索的特赞同学200个大型企业客户和8000个中小企业客户，50,000多个各类创意方，不断增长的上下游合作伙伴，还有每位特赞人背后不断壮大的家庭成员……感谢所有“同路人”。'],
+  [2,'NFT_Area_48','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/09.jpg','特赞@2050，让全世界的年青人因为科技团聚','每一年 未来的世界，会变成什么样？人工智能，会怎样融入我们的生活？AI 如何解放人类的生产力与想象力？每年4-5月，特赞来到杭州云栖小镇，聚集全球各地热爱科技的年青人，带来想象力的狂欢。'],
+  [2,'NFT_Area_79','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/10.jpg','由同济特赞设计人工智能实验室出品的「AI赞绘：金山农民画」来上海进博会啦','2018/11 同济大学特赞设计人工智能实验室在「遇见上海」板块打造了「AI赞绘：金山农民画」，通过 Tezign.EYE（特赞眼：创意内容的图像处理引擎），对200多张金山农民画进行解构和学习，提炼出金山农民画中的关键风格和元素，用科技赋能传统手工艺术的想象力。'],
+  [2,'NFT_Area_34','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/11.jpg','范老师给特物馆的寄语','用物留住特别的特赞，用心唤起特赞的特别！'],
+  [2,'NFT_Area_40','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/12.jpg','2020 特赞工牌','2020/06/15 用AI智能生成的工牌，我们也用上啦！各种脑洞大开的特赞工牌，代表了各种各样的特赞人'],
+  // [2,'NFT_Area_40','https://dww4fzr5k5i0x.cloudfront.net/temple/examples/example4.mp4','Example 4','Example 4'],
 ]
 
 async function main() {
