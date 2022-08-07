@@ -32,7 +32,7 @@ async function fillSlots(space: SpaceData) {
   }
 }
 
-const Space: NextPage<{slug: string}> = ({ slug }) => {
+const Space: NextPage<{slug: string, ignoreMobile: boolean}> = ({ slug, ignoreMobile }) => {
   const [mobileDetect, setMobileDetect] = useState(getMobileDetect('SSR'))
   const [loadingProgress, setLoadingProgress] = useState(0)
   const [space, setSpace] = useState<SpaceData|null>(null)
@@ -60,7 +60,7 @@ const Space: NextPage<{slug: string}> = ({ slug }) => {
   }, [slug])
 
   useEffect(() => {
-    if (!space || !mobileDetect.isDesktop()) {
+    if (!space || mobileDetect.isSSR() || (mobileDetect.isMobile() && !ignoreMobile)) {
       return
     }
     let updateProgress = (progress: number) => setLoadingProgress(Math.floor(progress * 100))
@@ -79,7 +79,7 @@ const Space: NextPage<{slug: string}> = ({ slug }) => {
       updateProgress = () => {}
       document.removeEventListener('selectSlot', listener)
     }
-  }, [space, mobileDetect])
+  }, [space, mobileDetect, ignoreMobile])
 
   useEffect(() => {
     if (loadingProgress >= 100) {
@@ -128,7 +128,9 @@ const Space: NextPage<{slug: string}> = ({ slug }) => {
   //   return <Error statusCode={404} />
   // } else
 
-  if (!mobileDetect.isDesktop()) {
+  if (mobileDetect.isSSR()) {
+    return <div></div>
+  } else if (mobileDetect.isMobile() && !ignoreMobile) {
     return <div className='min-h-screen flex flex-col items-center justify-center bg-black text-white'>
       <div
         className='w-12 h-12 my-4'
@@ -158,10 +160,12 @@ const Space: NextPage<{slug: string}> = ({ slug }) => {
   }
 }
 
-Space.getInitialProps = async function({ query }): Promise<{slug:string}> {
+Space.getInitialProps = async function({ query }): Promise<{slug:string,ignoreMobile:boolean}> {
   const slug = (query.slug ?? '').toString()
+  const m = (query.m ?? '').toString()
   return {
-    slug
+    slug,
+    ignoreMobile: m === '1',
   }
 }
 
