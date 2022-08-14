@@ -1,18 +1,18 @@
 import clsx from 'clsx'
-import axios from 'axios'
+import { useMemo, useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 import Error from 'next/error'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useMemo, useEffect, useState } from 'react'
-import { Space, MediaSlot } from '@prisma/client'
-import renderWebGL from '@/components/temple/render-webgl'
-import ProgressCover from '@/components/temple/progress-cover'
 import { cdnMediaUri, NFTData } from '@/lib/nfts'
 import { getMobileDetect } from '@/lib/utils'
+import renderWebGL from '@/components/temple/render-webgl'
+import ProgressCover from '@/components/temple/progress-cover'
+import { Space, MediaSlot } from '@prisma/client'
+import prisma from '@/lib/prisma'
 
-type SpaceData = Space & {
-  mediaSlots: MediaSlot[]
+type SpaceData = Pick<Space, 'id' | 'ownerAddress' | 'slug' | 'title' | 'description' | 'config' | 'mediaSlots'> & {
+  mediaSlots: Pick<MediaSlot, 'id' | 'slotKey' | 'mediaUri' | 'contractAddress' | 'tokenId' | 'name' | 'description'>[]
 }
 
 async function fillSlots(space: SpaceData) {
@@ -32,14 +32,17 @@ async function fillSlots(space: SpaceData) {
   }
 }
 
-const Space: NextPage<{slug: string, ignoreMobile: boolean}> = ({ slug, ignoreMobile }) => {
+const Page: NextPage<{
+  space: SpaceData,
+  slug: string,
+  ignoreMobile: boolean,
+}> = ({ space, slug, ignoreMobile }) => {
   const [mobileDetect, setMobileDetect] = useState(getMobileDetect('SSR'))
   const [loadingProgress, setLoadingProgress] = useState(0)
-  const [space, setSpace] = useState<SpaceData|null>(null)
   const [activeSlotKey, setActiveSlotKey] = useState('')
 
   const activeMediaSlot = useMemo<MediaSlot|null>(() => {
-    if (!space || !activeSlotKey) {
+    if (!activeSlotKey) {
       return null
     }
     const mediaSlot = space.mediaSlots.find((item) => item.slotKey === activeSlotKey)
@@ -54,13 +57,7 @@ const Space: NextPage<{slug: string, ignoreMobile: boolean}> = ({ slug, ignoreMo
   }, [])
 
   useEffect(() => {
-    axios.get(`/api/spaces/${slug}`).then((res) => {
-      setSpace(res.data)
-    })
-  }, [slug])
-
-  useEffect(() => {
-    if (!space || mobileDetect.isSSR() || (mobileDetect.isMobile() && !ignoreMobile)) {
+    if (mobileDetect.isSSR() || (mobileDetect.isMobile() && !ignoreMobile)) {
       return
     }
     let updateProgress = (progress: number) => setLoadingProgress(Math.floor(progress * 100))
@@ -125,12 +122,6 @@ const Space: NextPage<{slug: string, ignoreMobile: boolean}> = ({ slug, ignoreMo
     </div>
   }
 
-  // if (!slug) {
-  //   return <div />
-  // } else if (slug !== 'bmrlab') {
-  //   return <Error statusCode={404} />
-  // } else
-
   if (mobileDetect.isSSR()) {
     return <div></div>
   } else if (mobileDetect.isMobile() && !ignoreMobile) {
@@ -163,13 +154,46 @@ const Space: NextPage<{slug: string, ignoreMobile: boolean}> = ({ slug, ignoreMo
   }
 }
 
-Space.getInitialProps = async function({ query }): Promise<{slug:string,ignoreMobile:boolean}> {
+export async function getServerSideProps({ query }: {
+  query: { slug: string, m: string }
+}) {
   const slug = (query.slug ?? '').toString()
   const m = (query.m ?? '').toString()
+  // axios.get(`/api/spaces/${slug}`)
+  const space: SpaceData = await prisma.space.findUnique({
+    where: { slug },
+    select: {
+      id: true,
+      ownerAddress: true,
+      slug: true,
+      title: true,
+      description: true,
+      config: true,
+      mediaSlots: {
+        select: {
+          id: true,
+          slotKey: true,
+          mediaUri: true,
+          contractAddress: true,
+          tokenId: true,
+          name: true,
+          description: true,
+        }
+      }
+    }
+  })
+  if (!space) {
+    return {
+      notFound: true
+    }
+  }
   return {
-    slug,
-    ignoreMobile: m === '1',
+    props: {
+      space,
+      slug,
+      ignoreMobile: m === '1',
+    }
   }
 }
 
-export default Space
+export default Page
