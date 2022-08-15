@@ -24,10 +24,10 @@ const TEZIGN_818_SPACE = {
 }
 
 const SMALL_BMR_IP_SPACE = {
-    "loaderUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_small.loader.js",
-    "dataUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_small.data.gz",
-    "frameworkUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_small.framework.js.gz",
-    "codeUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_small.wasm.gz",
+    "loaderUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_small_YANSHENG.loader.js",
+    "dataUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_small_YANSHENG.data.gz",
+    "frameworkUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_small_YANSHENG.framework.js.gz",
+    "codeUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_small_YANSHENG.wasm.gz",
     "streamingAssetsUrl": "StreamingAssets",
     "companyName": "Simple",
     "productName": "Temple Of Muse",
@@ -116,14 +116,26 @@ const MEDIA_SLOTS_DATA: [number,string,string,string,string][] = [
   [2,'NFT_Area_54','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/03.jpg','发现特赞海报','2014/01<br>特赞第一次线下活动，在2013年12月31日举行，居然有超过50位朋友来参加'],
   [2,'NFT_Area_75','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/04.jpg','发布全球首份《设计人工智能报告》','2018/4<br>2018年，特赞与同济大学设计创意学院联合创立的‘D&AI设计与人工智能实验室’ 发布第一份《2017设计与人工智能报告》，回应纠葛在人工智能与设计的未来之间的迷思，报告发布至今已被100万+人浏览阅读。'],
   [2,'NFT_Area_39','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/05.jpg','人民日报上的特赞','2019/1<br>若把人工智能和人的大脑进行类比，这些应用都是追求更高、更快、更强、更准的“左脑”范畴。但要实现人机协同，还需延展出具有空间感、形象感、想象力、创造力等方面的人工智能“右脑”，让机器更善意、更有温度。——特赞创始人范凌'],
-  [2,'NFT_Area_16','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/06.jpg','#用插话说感谢你#','特赞和微博动漫联合发起暖心campaign，从#感恩许愿树# 到 #用插画说感谢你# ，两周多时间，特赞召集100+优秀插画师一起发声，打造超人气话题。插画师的力量，在小小话题下被不断放大！'],
+  [2,'NFT_Area_16','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/06.jpg','#用插画说感谢你#','特赞和微博动漫联合发起暖心campaign，从#感恩许愿树# 到 #用插画说感谢你# ，两周多时间，特赞召集100+优秀插画师一起发声，打造超人气话题。插画师的力量，在小小话题下被不断放大！'],
   [2,'NFT_Area_17','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/07.jpg','特赞作为亚太区唯一内容科技公司上榜 Forrester MRM报告','2022/3<br>Forrester 是全球知名独立技术和市场调研公司 特赞内容科技,上榜Forrester 2022年Q1 MRM 报告 特赞入选 Forrester Now Tech MRM 报告 成为亚太区唯一被收录的内容科技厂商'],
   [2,'NFT_Area_70','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/08.jpg','特赞正式成为独角兽','2021/11<br>2021年特赞完成了D1轮融资，成为估值超过10亿美金的内容科技独角兽。2015年，以科技赋能想象力为使命，特赞开始了创业之路。创业以来，我们始终专注于技术与创意的融合，致力于搭建创意内容的数字新基建。一路走来，我们要感谢400多位深度探索的特赞同学200个大型企业客户和8000个中小企业客户，50,000多个各类创意方，不断增长的上下游合作伙伴，还有每位特赞人背后不断壮大的家庭成员……感谢所有“同路人”。'],
   [2,'NFT_Area_48','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/09.jpg','特赞@2050，让全世界的年青人因为科技团聚','每一年<br>未来的世界，会变成什么样？人工智能，会怎样融入我们的生活？AI 如何解放人类的生产力与想象力？每年4-5月，特赞来到杭州云栖小镇，聚集全球各地热爱科技的年青人，带来想象力的狂欢。'],
   [2,'NFT_Area_79','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/10.jpg','由同济特赞设计人工智能实验室出品的「AI赞绘：金山农民画」来上海进博会啦','2018/11<br>同济大学特赞设计人工智能实验室在「遇见上海」板块打造了「AI赞绘：金山农民画」，通过 Tezign.EYE（特赞眼：创意内容的图像处理引擎），对200多张金山农民画进行解构和学习，提炼出金山农民画中的关键风格和元素，用科技赋能传统手工艺术的想象力。'],
   [2,'NFT_Area_34','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/11.jpg','范老师给特物馆的寄语','用物留住特别的特赞，用心唤起特赞的特别！'],
   [2,'NFT_Area_40','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/12.jpg','2020 特赞工牌','2020/06/15<br>用AI智能生成的工牌，我们也用上啦！各种脑洞大开的特赞工牌，代表了各种各样的特赞人'],
-  // [2,'NFT_Area_40','https://assets.bmr.art/temple/examples/example4.mp4','Example 4','Example 4'],
+  // small room 1
+  [2,'NFT_Area_4','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/13.jpg','国内第一场DAM Con，一场内容科技者的狂欢','2021/03/18<br>特赞Tezign 在上海举办国内首届 DAM Con 大会（内容体验数智化大会），介绍内容体验数据资产管理系统（Digital Asset Management，DAM），并发布在多种场景下的解决方案。特赞也是中国大陆首家系统性发布内容体验数据资产管理系统（Digital Asset Management，DAM）的科技企业。'],
+  [2,'NFT_Area_37','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/14.jpg','200+品牌都 DAM Happy啦','截至目前<br>特赞帮助阿里巴巴、联合利华、字节跳动、百事、资生堂、宝洁、麦当劳、亨氏、可口可乐、百威、蚂蚁金服、雀巢、腾讯、欧莱雅、达能、中国平安、中金、保时捷、奥迪、Aptar等全球领先品牌搭建内容中台，升级内容战略'],
+  [2,'NFT_Area_65','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/15.jpg','特赞入选国家级工业设计中心','2021/11<br>特赞入选了工业和信息化部的第五批国家级工业设计中心。国家级工业设计中心自2013年起每两年认定一次，是国家引导企业重视设计创新，推动工业企业转型升级的重要手段。截止目前，全国仅有299家国家级工业设计中心获得认定。'],
+  // small room 2
+  [2,'NFT_Area_67','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/16.mp4','特赞第一个战略发布会在梅赛德斯奔驰中心举行','2018/08/15<br>首次发布特赞数据智能产品'],  // mp4
+  [2,'NFT_Area_18','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/17.mp4','Musetransfer 上线啦','2022/1<br>MuseTransfer是一款极简有趣的大文件传输工具，无需下载客户端，甚至无需注册，打开网页即可全速上传或下载超大文件，还能用一个链接轻松收集多人分享的文件。你可以自由设置个性化的传输背景，定义收件人的下载体验，摆脱枯燥的传输过程，让传文件这样平凡的事也变得很有趣。'],  // mp4
+  [2,'NFT_Area_20','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/18.mp4','疫情期间，特赞人化身天使来送菜','2022/4<br>特赞天使们自发送菜，人在线上温情相聚，菜从线下驱车直达。最困难的时候，特赞的我们总是会在紧要关头互相帮助，特赞也总能给我们稳定的安全感。终于理解了特赞的logo特赞手的意义是什么：原来是在困难的时候给我一个拥抱啊！'],  // mp4
+  // small room 3
+  [2,'NFT_Area_7','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/21.jpg','特赞人的温暖群像','一些每次看到都能再次开心的照片，特赞因为这群人“特赞”！'],
+  [2,'NFT_Area_35','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/22.jpg','特赞夏季运动会','每周五早上八点半楼下集中热身，遇上下雨的时候转到室内跳起来，顾名思义夏季运动会，冬天就结束了！'],
+  [2,'NFT_Area_63','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/23.jpg','特赞领导力101开课','2021年7月2日<br>特赞领导力101正式开课。恰逢中国共产党建党100周年庆，组织同学们参观了中共一大会址纪念馆。大家都被革命的激情点燃了！触景生情，做海报留作纪念。<br>--特赞101班同学银子'],
+  [2,'NFT_Area_74','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/24.jpg','第一届校招海报','2022年特赞开启了校招元年'],
 ]
 
 async function main() {
