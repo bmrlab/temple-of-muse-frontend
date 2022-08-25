@@ -7,7 +7,7 @@ type ResponseData = Temple & {
 }
 
 async function getTemple(req: NextApiRequest, res: NextApiResponse<ResponseData|ResponseError>) {
-  const templeId: number = parseInt(req.query.id.toString())
+  const templeId: number = +(req.query.id ?? '')
   try {
     const temple = await TempleObjects().where('id', templeId).first()
     if (!temple) {

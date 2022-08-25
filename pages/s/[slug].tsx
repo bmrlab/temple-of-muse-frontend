@@ -92,8 +92,8 @@ const Page: NextPage<{
         <div className='md:h-3/4 text-white relative'>
           {/* black bg with rounded corner */}
           <div
-            className='absolute top-0 left-0 w-full h-full bg-black rounded-3xl'
-            style={{'backdropFilter': 'blur(40px)', 'background': 'rgba(7, 7, 7, 0.3)'}}
+            className='absolute top-0 left-0 w-full h-full bg-black rounded-3xl backdrop-blur-md'
+            style={{'background': 'rgba(7, 7, 7, 0.3)'}}
           ></div>
           {/* eslint-disable */}
           <div className='relative h-full py-16 md:py-12 flex items-center justify-center'>

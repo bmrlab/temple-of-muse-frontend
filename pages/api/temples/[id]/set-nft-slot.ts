@@ -4,7 +4,7 @@ import { Temple, NFTSlot, NFTSlotObjects } from '@/lib/db/models'
 
 
 async function setNFTSlot(req: NextApiRequest, res: NextApiResponse<NFTSlot|ResponseError>) {
-  const templeId: number = parseInt(req.query.id.toString())
+  const templeId: number = +(req.query.id ?? '')
   const { slot_key, media_uri, contract_address, token_id } = req.body
   try {
     const payload = {
