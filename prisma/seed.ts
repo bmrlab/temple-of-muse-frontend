@@ -23,13 +23,24 @@ const TEZIGN_818_SPACE = {
   "productVersion": "0.1"
 }
 
-const SMALL_BMR_IP_SPACE = {
+const SMALL_BMR_IP_YANSHENG = {
     "loaderUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_small_YANSHENG.loader.js",
     "dataUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_small_YANSHENG.data.gz",
     "frameworkUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_small_YANSHENG.framework.js.gz",
     "codeUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_small_YANSHENG.wasm.gz",
     "streamingAssetsUrl": "StreamingAssets",
-    "companyName": "Simple",
+    "companyName": "YANSHENG",
+    "productName": "Temple Of Muse",
+    "productVersion": "0.1"
+}
+
+const SMALL_BMR_IP_SIMMONS = {
+    "loaderUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_simmons.loader.js",
+    "dataUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_simmons.data.gz",
+    "frameworkUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_simmons.framework.js.gz",
+    "codeUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_simmons.wasm.gz",
+    "streamingAssetsUrl": "StreamingAssets",
+    "companyName": "SIMMONS",
     "productName": "Temple Of Muse",
     "productVersion": "0.1"
 }
@@ -37,7 +48,8 @@ const SMALL_BMR_IP_SPACE = {
 const SPACES_DATA: [number,string,string,string,string,string][] = [
   [1,'0x4a3e40B76a946495a6255B521240487e71f73d2C','bmrlab','BMR Lab\'s collection','All NFTs collected by BMR Lab\'s members',JSON.stringify(BMR_EXPO_SPACE)],
   [2,'0x4a3e40B76a946495a6255B521240487e71f73d2C','818','Tezign 818','Tezign 818 Annual Exhibition',JSON.stringify(TEZIGN_818_SPACE)],
-  [3,'0x4a3e40B76a946495a6255B521240487e71f73d2C','simple','BMR Brands','BMR Brands',JSON.stringify(SMALL_BMR_IP_SPACE)],
+  [3,'0x4a3e40B76a946495a6255B521240487e71f73d2C','yansheng','YANSHENG','YANSHENG',JSON.stringify(SMALL_BMR_IP_YANSHENG)],
+  [4,'0x4a3e40B76a946495a6255B521240487e71f73d2C','simmons','SIMMONS','SIMMONS',JSON.stringify(SMALL_BMR_IP_SIMMONS)],
 ]
 
 const MEDIA_SLOTS_DATA: [number,string,string,string,string][] = [
@@ -110,7 +122,7 @@ const MEDIA_SLOTS_DATA: [number,string,string,string,string][] = [
   [1,'NFT_Area_30','https://assets.bmr.art/image/0048_oppenheimer.jpg','#0048_oppenheimer','#0048_oppenheimer'],
   [1,'NFT_Area_79','https://assets.bmr.art/image/0002_archimedes.jpg','#0002_archimedes','#0002_archimedes'],
   [1,'NFT_Area_54','https://assets.bmr.art/image/0034_fleming.jpg','#0034_fleming','#0034_fleming'],
-
+  /* --- */
   [2,'NFT_Area_13','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/01.jpg','特赞第一个感恩节','2014/11<br>百无聊赖，感激已经开始在特赞社区活跃起来的朋友们。'],
   [2,'NFT_Area_28','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/02.jpg','每当好事发生','2015/10<br>2015年10月29日特赞第一版网站上线了付费功能，支付99元可以使用特赞的对接服务。上线不久，就有人支付了第一笔费用。感受到一种意外的信任感，用这99元请全体同学庆祝，正好够买人头份的“可爱多”冰激凌。从此，每逢好事，特赞人就会吃可爱多。到现在已经吃了上千只可爱多。'],
   [2,'NFT_Area_54','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/03.jpg','发现特赞海报','2014/01<br>特赞第一次线下活动，在2013年12月31日举行，居然有超过50位朋友来参加'],
@@ -136,15 +148,31 @@ const MEDIA_SLOTS_DATA: [number,string,string,string,string][] = [
   [2,'NFT_Area_35','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/22.jpg','特赞夏季运动会','每周五早上八点半楼下集中热身，遇上下雨的时候转到室内跳起来，顾名思义夏季运动会，冬天就结束了！'],
   [2,'NFT_Area_63','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/23.jpg','特赞领导力101开课','2021年7月2日<br>特赞领导力101正式开课。恰逢中国共产党建党100周年庆，组织同学们参观了中共一大会址纪念馆。大家都被革命的激情点燃了！触景生情，做海报留作纪念。<br>--特赞101班同学银子'],
   [2,'NFT_Area_74','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/24.jpg','第一届校招海报','2022年特赞开启了校招元年'],
+  /* --- */
+  [3,'Title_Wall', 'https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/20220825-113835.jpeg', '虚实边界艺术潮流的共探', '8.26 ~ 11.26'],
+  [3,'NFT_Area_1','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/img3-1.jpg',
+     '拥抱','28x19cm 纸本丙烯 2022<br>⼥⼈抱着冰冷的⽯柱寻求慰藉，此刻她与暖⾊系的灯光格格不 ⼊，⼀半身体处于冷光内，⼀部分处于暖光内，形成排斥和反差感。'],
+  [3,'NFT_Area_0','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/img3-2.jpg',
+     '沙漏','28x19cm 纸本丙烯 2022<br>时光不断的流失，成为细沙留下痕迹，时间被掌握是具有难度的，但是⼈们可以去体会时间带来的意义和价值。'],
+  [3,'NFT_Area_6','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/img1-2.jpg',
+     '逆像2','15cm×23cm<br>说实话大自然不需要人类'],
+  [3,'NFT_Area_4','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/img1-1.jpg',
+     '割裂11','23cm×30cm<br>离核心越近越聚集'],
+  [3,'NFT_Area_2','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/img0.jpg',
+     '嘘','油画 100x100cm 2012<br>继《英雄》系列之后，2012年开始我创作了《包扎》系列，军人打仗容易受伤，自然过渡到《包扎》系列，想表现一种大无畏的精神，《包扎》系列没有军装，所以不单单指军人，可以代表每个人，在经历各种磨难之后，依然乐观地面对生活。'],
+  [3,'NFT_Area_3','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/img2-2.jpg',
+     'The night is wonderful','15.9*37.5cm 纸本 数码绘画 2019<br>“昔者庄周梦为蝴蝶，栩栩然蝴蝶也…不知周之梦为蝴蝶与?蝴蝶之梦为周与?周与蝴蝶则必有分矣。”避开在虚幻的思想中追求答案，从表层上来看，我想营造的却是画面中的“形”与“像”。图像是真实的，但如何去解读所捕获到的“形”与“象”却是虚幻的--这不是另一种方式的做梦吗?毕竟没有日常生活的经验(现实)，睡眠时的大脑皮层，也不会无组织无纪律吧。这是我毕业创作时期的一幅随笔创作，当时想表达的是生命与自然的关系，对重生与死亡的思考。一切都在习惯中进行，对于那时已经算是比较放松的作品了。'],
+  [3,'NFT_Area_7','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/img2-1.jpg',
+     'Fairy tale-Ⅱ','纸本，数码绘画 74.8*51cm 2020<br>借鉴新艺术运动和日本早期少女漫画的风格，<Fairytale>通过绘制具有装饰性的线条、以西方民间童话故事为主题进行的一组插画创作。每一个故事的主题都以以具有符号特征的少女或动物为主角，这些少女以自然舒适的动态在画面中呈现，弱化光影的体积塑造强调线条，借用类似雕版印刷的手法进行对线条进行刻画。同时用比较复古的平涂手法进行颜色填充。以达到复原故事瞬间发生场景的构想。'],
 ]
 
 async function main() {
   // clear first
   await prisma.mediaSlot.deleteMany({
-    where: { spaceId: { in: [1, 2, 3] } }
+    where: { spaceId: { in: [1, 2, 3, 4] } }
   })
   await prisma.space.deleteMany({
-    where: { id: { in: [1, 2, 3] } }
+    where: { id: { in: [1, 2, 3, 4] } }
   })
   // spaces
   const spacesData = SPACES_DATA.map((line: [number,string,string,string,string,string]) => {

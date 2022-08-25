@@ -204,7 +204,7 @@ export async function getServerSideProps({ query }: {
     props: {
       space,
       slug,
-      ignoreMobile: m === '1',
+      ignoreMobile: m === '1' || slug === 'yansheng' || slug === 'simmons' || slug === 'simple',
     }
   }
 }
