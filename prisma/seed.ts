@@ -48,8 +48,8 @@ const SMALL_BMR_IP_SIMMONS = {
 const SPACES_DATA: [number,string,string,string,string,string][] = [
   [1,'0x4a3e40B76a946495a6255B521240487e71f73d2C','bmrlab','BMR Lab\'s collection','All NFTs collected by BMR Lab\'s members',JSON.stringify(BMR_EXPO_SPACE)],
   [2,'0x4a3e40B76a946495a6255B521240487e71f73d2C','818','Tezign 818','Tezign 818 Annual Exhibition',JSON.stringify(TEZIGN_818_SPACE)],
-  [3,'0x4a3e40B76a946495a6255B521240487e71f73d2C','yansheng','YANSHENG','YANSHENG',JSON.stringify(SMALL_BMR_IP_YANSHENG)],
-  [4,'0x4a3e40B76a946495a6255B521240487e71f73d2C','simmons','SIMMONS','SIMMONS',JSON.stringify(SMALL_BMR_IP_SIMMONS)],
+  [3,'0x4a3e40B76a946495a6255B521240487e71f73d2C','yansheng','BMRLAB','BMRLAB',JSON.stringify(SMALL_BMR_IP_YANSHENG)],
+  [4,'0x4a3e40B76a946495a6255B521240487e71f73d2C','simmons','BMRLAB','BMRLAB',JSON.stringify(SMALL_BMR_IP_SIMMONS)],
 ]
 
 const MEDIA_SLOTS_DATA: [number,string,string,string,string][] = [
@@ -150,9 +150,9 @@ const MEDIA_SLOTS_DATA: [number,string,string,string,string][] = [
   [2,'NFT_Area_74','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/24.jpg','第一届校招海报','2022年特赞开启了校招元年'],
   /* --- */
   [3,'Title_Wall', 'https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/20220825-113835.jpeg', '虚实边界艺术潮流的共探', '8.26 ~ 11.26'],
-  [3,'NFT_Area_1','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/img3-1.jpg',
+  [3,'NFT_Area_1','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/img3-4.jpg',
      '拥抱','28x19cm 纸本丙烯 2022<br>⼥⼈抱着冰冷的⽯柱寻求慰藉，此刻她与暖⾊系的灯光格格不 ⼊，⼀半身体处于冷光内，⼀部分处于暖光内，形成排斥和反差感。'],
-  [3,'NFT_Area_0','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/img3-2.jpg',
+  [3,'NFT_Area_0','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/img3-3.jpg',
      '沙漏','28x19cm 纸本丙烯 2022<br>时光不断的流失，成为细沙留下痕迹，时间被掌握是具有难度的，但是⼈们可以去体会时间带来的意义和价值。'],
   [3,'NFT_Area_6','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/img1-2.jpg',
      '逆像2','15cm×23cm<br>说实话大自然不需要人类'],

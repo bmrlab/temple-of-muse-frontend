@@ -138,8 +138,10 @@ const Page: NextPage<{
           }}
         ></div>
         <div className='text-grandslang text-3xl my-2'>Temple OF Muse</div>
-        <div className='px-4 my-2 text-center'>Not available in mobile yet, please open in desktop.</div>
-        <a
+        {/*<div className='px-4 my-2 text-center'>Not available in mobile yet, please open in desktop.</div>*/}
+        <div className='px-4 my-2 text-center'>为了更好的体验，请在电脑端观展</div>
+        <div className='px-4 my-2 text-center text-xs'>{window.location.href}</div>
+        {/*<a
           className='py-3 px-16 my-6 bg-white text-black rounded-full flex flex-row items-center'
           href='https://bmr.art'
         >
@@ -147,7 +149,7 @@ const Page: NextPage<{
           <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10.4812 2.35418L3.27839 2.35418V0L14.5 0V11.2216H12.1458V4.01884L2.16466 14L0.5 12.3353L10.4812 2.35418Z" fill="black"/>
           </svg>
-        </a>
+        </a>*/}
       </div>
     )
   } else {
@@ -204,7 +206,7 @@ export async function getServerSideProps({ query }: {
     props: {
       space,
       slug,
-      ignoreMobile: m === '1' || slug === 'yansheng' || slug === 'simmons' || slug === 'simple',
+      ignoreMobile: m === '1',
     }
   }
 }
