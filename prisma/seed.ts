@@ -6,10 +6,10 @@ const BMR_EXPO_SPACE = {
   "dataUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-bmr-expo/Build/tom_bmr_818_wegbl.data.gz",
   "frameworkUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-bmr-expo/Build/tom_bmr_818_wegbl.framework.js.gz",
   "codeUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-bmr-expo/Build/tom_bmr_818_wegbl.wasm.gz",
-  "streamingAssetsUrl": "StreamingAssets",
-  "companyName": "BMR LAB",
-  "productName": "Temple Of Muse",
-  "productVersion": "0.1"
+  // "streamingAssetsUrl": "StreamingAssets",
+  // "companyName": "BMR LAB",
+  // "productName": "Temple Of Muse",
+  // "productVersion": "0.1"
 }
 
 const TEZIGN_818_SPACE = {
@@ -17,10 +17,6 @@ const TEZIGN_818_SPACE = {
   "dataUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-818-expo/Build/tom_tesign_818_wegbl.data.gz",
   "frameworkUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-818-expo/Build/tom_tesign_818_wegbl.framework.js.gz",
   "codeUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-818-expo/Build/tom_tesign_818_wegbl.wasm.gz",
-  "streamingAssetsUrl": "StreamingAssets",
-  "companyName": "Tezign",
-  "productName": "Temple Of Muse",
-  "productVersion": "0.1"
 }
 
 const SMALL_BMR_IP_YANSHENG = {
@@ -28,10 +24,6 @@ const SMALL_BMR_IP_YANSHENG = {
     "dataUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_small_YANSHENG.data.gz",
     "frameworkUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_small_YANSHENG.framework.js.gz",
     "codeUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_small_YANSHENG.wasm.gz",
-    "streamingAssetsUrl": "StreamingAssets",
-    "companyName": "YANSHENG",
-    "productName": "Temple Of Muse",
-    "productVersion": "0.1"
 }
 
 const SMALL_BMR_IP_SIMMONS = {
@@ -39,10 +31,6 @@ const SMALL_BMR_IP_SIMMONS = {
     "dataUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/build_simmons.data",
     "frameworkUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/build_simmons.framework.js",
     "codeUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/build_simmons.wasm",
-    "streamingAssetsUrl": "StreamingAssets",
-    "companyName": "SIMMONS",
-    "productName": "Temple Of Muse",
-    "productVersion": "0.1"
 }
 
 const SPACES_DATA: [number,string,string,string,string,string][] = [

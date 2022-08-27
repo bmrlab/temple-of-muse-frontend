@@ -7,7 +7,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { cdnMediaUri, NFTData } from '@/lib/nfts'
 import { getMobileDetect } from '@/lib/utils'
-import renderWebGL from '@/components/temple/render-webgl'
+import { Unity, useUnityContext } from 'react-unity-webgl'
 import ProgressCover from '@/components/temple/progress-cover'
 import { Space, MediaSlot } from '@prisma/client'
 import prisma from '@/lib/prisma'
@@ -16,32 +16,33 @@ type MediaSlotData = Pick<MediaSlot, 'id' | 'slotKey' | 'mediaUri' | 'contractAd
 type SpaceData = Pick<Space, 'id' | 'ownerAddress' | 'slug' | 'title' | 'description' | 'config'> & {
   mediaSlots: MediaSlotData[]
 }
+type SpaceConfigData = {
+  loaderUrl: string,
+  dataUrl: string,
+  frameworkUrl: string,
+  codeUrl: string,
+}
 
-async function fillSlots(space: SpaceData) {
-  const unityInstance = (window as any).unityInstance
-  if (!unityInstance) {
-    console.log('unityInstance not ready, retry in 1s')
-    setTimeout(() => fillSlots(space), 1000)
-    return
-  }
+async function fillSlots(space: SpaceData, sendMessage: any) {
   // unityInstance.SendMessage('Sun', 'SetTime', '{"hour":0,"minutes":0,"seconds":0}')
   for (const mediaSlot of space.mediaSlots) {
     const payload = {
       slotKey: mediaSlot.slotKey,
       imageURL: cdnMediaUri(mediaSlot.mediaUri),
     }
-    unityInstance.SendMessage('NFT_Manager', 'SetImage', JSON.stringify(payload))
+    sendMessage('NFT_Manager', 'SetImage', JSON.stringify(payload))
   }
 }
 
 const Page: NextPage<{
+  spaceConfig: SpaceConfigData,
   space: SpaceData,
   slug: string,
   ignoreMobile: boolean,
-}> = ({ space, slug, ignoreMobile }) => {
+}> = ({ spaceConfig, space, slug, ignoreMobile }) => {
   const [mobileDetect, setMobileDetect] = useState(getMobileDetect('SSR'))
-  const [loadingProgress, setLoadingProgress] = useState(0)
   const [activeSlotKey, setActiveSlotKey] = useState('')
+  const { sendMessage, unityProvider, isLoaded, loadingProgression } = useUnityContext(spaceConfig)
 
   const activeMediaSlot = useMemo<MediaSlotData|null>(() => {
     if (!activeSlotKey) {
@@ -62,29 +63,20 @@ const Page: NextPage<{
     if (mobileDetect.isSSR() || (mobileDetect.isMobile() && !ignoreMobile)) {
       return
     }
-    let updateProgress = (progress: number) => setLoadingProgress(Math.floor(progress * 100))
-    let config = null
-    try {
-      config = JSON.parse(space.config as string)
-    } catch(err) {}
-    if (!(window as any).unityInstance) {
-      renderWebGL(updateProgress, null, config)
-    }
     const listener = (e: any) => {
       setActiveSlotKey(e.detail)
     }
     document.addEventListener('selectSlot', listener)
     return () => {
-      updateProgress = () => {}
       document.removeEventListener('selectSlot', listener)
     }
   }, [space, mobileDetect, ignoreMobile])
 
   useEffect(() => {
-    if (loadingProgress >= 100) {
-      fillSlots(space!)
+    if (isLoaded) {
+      fillSlots(space!, sendMessage)
     }
-  }, [space, loadingProgress])
+  }, [space, isLoaded, sendMessage])
 
   const MediaDetailDrawer = ({ activeMediaSlot }: { activeMediaSlot: MediaSlotData }) => {
     return (
@@ -160,8 +152,10 @@ const Page: NextPage<{
           <meta name='description' content={space.description ?? ''} />
           <link rel='icon' href='/favicon.ico' />
         </Head>
-        <canvas id='unity-canvas'></canvas>
-        <ProgressCover loadingProgress={loadingProgress} />
+        <div>
+          <Unity style={{ width: '100vw', height: '100vh' }} unityProvider={unityProvider} />
+        </div>
+        {isLoaded === false && <ProgressCover loadingProgress={loadingProgression * 100} />}
         {activeMediaSlot && <MediaDetailDrawer activeMediaSlot={activeMediaSlot} />}
       </div>
     )
@@ -202,8 +196,18 @@ export async function getServerSideProps({ query }: {
       notFound: true
     }
   }
+  let spaceConfig: SpaceConfigData = {
+    loaderUrl: '/space/Build/temple_of_muse_build_webgl.loader.js',
+    dataUrl: '/space/Build/temple_of_muse_build_webgl.data.gz',
+    frameworkUrl: '/space/Build/temple_of_muse_build_webgl.framework.js.gz',
+    codeUrl: '/space/Build/temple_of_muse_build_webgl.wasm.gz',
+  }
+  try {
+    spaceConfig = JSON.parse(space.config as string)
+  } catch(err) {}
   return {
     props: {
+      spaceConfig,
       space,
       slug,
       ignoreMobile: m === '1',
