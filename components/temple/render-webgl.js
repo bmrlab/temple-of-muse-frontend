@@ -32,8 +32,12 @@ export default function renderWebGL(progressCallback, defaultHeight, config) {
     }).then((unityInstance) => {
       progressCallback(1)
       window.unityInstance = unityInstance
-    }).catch((message) => {
-      alert(message)
+      window.addEventListener('resize', () => {
+        canvas.style.width = window.innerWidth + 'px'
+        canvas.style.height = (defaultHeight || window.innerHeight) + 'px'
+      })
+    }).catch((err) => {
+      alert(err.message || '加载失败')
     })
   }
   document.body.appendChild(script)
