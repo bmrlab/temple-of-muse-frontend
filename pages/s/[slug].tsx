@@ -210,7 +210,7 @@ export async function getServerSideProps({ query }: {
       spaceConfig,
       space,
       slug,
-      ignoreMobile: m === '1',
+      ignoreMobile: m === '1' || slug === 'simmons',
     }
   }
 }
