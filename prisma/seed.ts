@@ -35,10 +35,10 @@ const SMALL_BMR_IP_YANSHENG = {
 }
 
 const SMALL_BMR_IP_SIMMONS = {
-    "loaderUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_simmons.loader.js",
-    "dataUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_simmons.data.gz",
-    "frameworkUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_simmons.framework.js.gz",
-    "codeUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/temple_of_muse_simmons.wasm.gz",
+    "loaderUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/build_simmons.loader.js",
+    "dataUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/build_simmons.data",
+    "frameworkUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/build_simmons.framework.js",
+    "codeUrl": "https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/space-small-bmr-ip/Build/build_simmons.wasm",
     "streamingAssetsUrl": "StreamingAssets",
     "companyName": "SIMMONS",
     "productName": "Temple Of Muse",
@@ -149,7 +149,7 @@ const MEDIA_SLOTS_DATA: [number,string,string,string,string][] = [
   [2,'NFT_Area_63','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/23.jpg','特赞领导力101开课','2021年7月2日<br>特赞领导力101正式开课。恰逢中国共产党建党100周年庆，组织同学们参观了中共一大会址纪念馆。大家都被革命的激情点燃了！触景生情，做海报留作纪念。<br>--特赞101班同学银子'],
   [2,'NFT_Area_74','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/818/24.jpg','第一届校招海报','2022年特赞开启了校招元年'],
   /* --- */
-  [3,'Title_Wall', 'https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/20220825-113835.jpeg', '虚实边界艺术潮流的共探', '8.26 ~ 11.26'],
+  [3,'Title_Wall', 'https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/yansheng-wall.jpg', '共探艺术潮流的虚实边界', '8.26 ~ 11.26'],
   [3,'NFT_Area_1','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/img3-4.jpg',
      '拥抱','28x19cm 纸本丙烯 2022<br>⼥⼈抱着冰冷的⽯柱寻求慰藉，此刻她与暖⾊系的灯光格格不 ⼊，⼀半身体处于冷光内，⼀部分处于暖光内，形成排斥和反差感。'],
   [3,'NFT_Area_0','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/img3-3.jpg',
@@ -164,6 +164,14 @@ const MEDIA_SLOTS_DATA: [number,string,string,string,string][] = [
      'The night is wonderful','15.9*37.5cm 纸本 数码绘画 2019<br>“昔者庄周梦为蝴蝶，栩栩然蝴蝶也…不知周之梦为蝴蝶与?蝴蝶之梦为周与?周与蝴蝶则必有分矣。”避开在虚幻的思想中追求答案，从表层上来看，我想营造的却是画面中的“形”与“像”。图像是真实的，但如何去解读所捕获到的“形”与“象”却是虚幻的--这不是另一种方式的做梦吗?毕竟没有日常生活的经验(现实)，睡眠时的大脑皮层，也不会无组织无纪律吧。这是我毕业创作时期的一幅随笔创作，当时想表达的是生命与自然的关系，对重生与死亡的思考。一切都在习惯中进行，对于那时已经算是比较放松的作品了。'],
   [3,'NFT_Area_7','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/img2-1.jpg',
      'Fairy tale-Ⅱ','纸本，数码绘画 74.8*51cm 2020<br>借鉴新艺术运动和日本早期少女漫画的风格，<Fairytale>通过绘制具有装饰性的线条、以西方民间童话故事为主题进行的一组插画创作。每一个故事的主题都以以具有符号特征的少女或动物为主角，这些少女以自然舒适的动态在画面中呈现，弱化光影的体积塑造强调线条，借用类似雕版印刷的手法进行对线条进行刻画。同时用比较复古的平涂手法进行颜色填充。以达到复原故事瞬间发生场景的构想。'],
+  /* --- */
+  [4,'Title_Wall', 'https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/simmons-wall.jpg', '探索黑科技与艺术的虚实边界', '8.31 ~ 11.30'],
+  [4,'NFT_Area_1','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/img5.jpg',
+     '"DualCool"双重酷爽科技','内置三重凉感凝胶海绵<br>融入纳米级凝胶微粒<br>提供持久、恰到好处的凉感<br>同时兼顾舒适性、支撑性和透气性<br>营造酷爽舒适睡眠体验'],
+  [4,'NFT_Area_2','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/img5-1.jpg',
+     'e-ION CRYSTAL®负离子技术','独特的矿物石纤维<br>持续释放清新负离子<br>中和使身体疲惫的正离子<br>带来整夜有氧“森”呼吸<br>深度缓解身心压力'],
+  [4,'NFT_Area_3','https://pubtezign.oss-cn-beijing.aliyuncs.com/templeofmuse/yansheng/img5-2.jpg',
+     'Beautyrest®独立袋装弹簧科技','独立袋装弹簧科技<br>能够顺应人体提供像素点支撑<br>彼此独立活动互不干扰<br>减轻翻身引起的震荡传送<br>缔造彻夜无中断舒睡'],
 ]
 
 async function main() {
