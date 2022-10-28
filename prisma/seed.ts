@@ -33,11 +33,19 @@ const SMALL_BMR_IP_SIMMONS = {
     "codeUrl": "https://static-common.tezign.com/templeofmuse/space-small-bmr-ip/Build/build_simmons_gz.wasm.gz",
 }
 
+const ZAVENUE_SPACE = {
+  "loaderUrl": "https://static-common.tezign.com/templeofmuse/build_air_walls_gz/Build/build_air_walls_gz.loader.js",
+  "dataUrl": "https://static-common.tezign.com/templeofmuse/build_air_walls_gz/Build/build_air_walls_gz.data.gz",
+  "frameworkUrl": "https://static-common.tezign.com/templeofmuse/build_air_walls_gz/Build/build_air_walls_gz.framework.js.gz",
+  "codeUrl": "https://static-common.tezign.com/templeofmuse/build_air_walls_gz/Build/build_air_walls_gz.wasm.gz",
+}
+
 const SPACES_DATA: [number,string,string,string,string,string][] = [
   [1,'0x4a3e40B76a946495a6255B521240487e71f73d2C','bmrlab','BMR Lab\'s collection','All NFTs collected by BMR Lab\'s members',JSON.stringify(BMR_EXPO_SPACE)],
   [2,'0x4a3e40B76a946495a6255B521240487e71f73d2C','818','Tezign 818','Tezign 818 Annual Exhibition',JSON.stringify(TEZIGN_818_SPACE)],
   [3,'0x4a3e40B76a946495a6255B521240487e71f73d2C','yansheng','BMRLAB','BMRLAB',JSON.stringify(SMALL_BMR_IP_YANSHENG)],
   [4,'0x4a3e40B76a946495a6255B521240487e71f73d2C','simmons','BMRLAB','BMRLAB',JSON.stringify(SMALL_BMR_IP_SIMMONS)],
+  [5,'0x4a3e40B76a946495a6255B521240487e71f73d2C','zavenue','ZAVENUE','ZAVENUE',JSON.stringify(ZAVENUE_SPACE)],
 ]
 
 const MEDIA_SLOTS_DATA: [number,string,string,string,string][] = [
@@ -160,15 +168,28 @@ const MEDIA_SLOTS_DATA: [number,string,string,string,string][] = [
      'e-ION CRYSTAL®负离子技术','独特的矿物石纤维<br>持续释放清新负离子<br>中和使身体疲惫的正离子<br>带来整夜有氧“森”呼吸<br>深度缓解身心压力'],
   [4,'NFT_Area_3','https://static-common.tezign.com/templeofmuse/yansheng/img5-2.jpg',
      'Beautyrest®独立袋装弹簧科技','独立袋装弹簧科技<br>能够顺应人体提供像素点支撑<br>彼此独立活动互不干扰<br>减轻翻身引起的震荡传送<br>缔造彻夜无中断舒睡'],
+  /* --- */
+  [5,'NFT_Area_0','','',''],
+  [5,'NFT_Area_1','https://static-common.tezign.com/templeofmuse/zavenue/Sia/9cfdfda91648dfe2792cc0b5dc44722f.mp4','',''],
+  [5,'NFT_Area_2','https://static-common.tezign.com/templeofmuse/zavenue/meta%20street/4.mp4','',''],
+  [5,'NFT_Area_3','https://static-common.tezign.com/templeofmuse/zavenue/meta%20street/1.mp4','',''],
+  [5,'NFT_Area_4','','',''],
+  [5,'NFT_Area_5','https://static-common.tezign.com/templeofmuse/zavenue/meta%20street/5.mp4','',''],
+  [5,'NFT_Area_6','','',''],
+  [5,'NFT_Area_7','https://static-common.tezign.com/templeofmuse/zavenue/zhaoxiaoli/fe5dea938f8933e3b1588b1d67f85a5c.mp4','',''],
+  [5,'NFT_Area_8','https://static-common.tezign.com/templeofmuse/zavenue/meta%20street/3.mp4','',''],
+  [5,'NFT_Area_9','https://static-common.tezign.com/templeofmuse/zavenue/bmrlab/BMR_rocket_video.mov','',''],
+  [5,'NFT_Area_10','https://static-common.tezign.com/templeofmuse/zavenue/xinlan/a2d58b4301d8972ae3521a21a06e6417.mp4','',''],
+  [5,'NFT_Area_11','https://static-common.tezign.com/templeofmuse/zavenue/meta%20street/2.mp4','',''],
 ]
 
 async function main() {
   // clear first
   await prisma.mediaSlot.deleteMany({
-    where: { spaceId: { in: [1, 2, 3, 4] } }
+    where: { spaceId: { in: [1, 2, 3, 4, 5] } }
   })
   await prisma.space.deleteMany({
-    where: { id: { in: [1, 2, 3, 4] } }
+    where: { id: { in: [1, 2, 3, 4, 5] } }
   })
   // spaces
   const spacesData = SPACES_DATA.map((line: [number,string,string,string,string,string]) => {
